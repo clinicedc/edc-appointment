@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Classes &mdash; bhp_appointment_helper 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="bhp_appointment_helper 1.0 documentation" href="index.html" />
+    <link rel="next" title="Models" href="models.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">bhp_appointment_helper 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-bhp_appointment_helper.classes">
+<span id="classes"></span><h1>Classes<a class="headerlink" href="#module-bhp_appointment_helper.classes" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="appointment_helper.AppointmentHelper">
+<em class="property">class </em><tt class="descclassname">appointment_helper.</tt><tt class="descname">AppointmentHelper</tt><a class="reference internal" href="_modules/appointment_helper.html#AppointmentHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#appointment_helper.AppointmentHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="appointment_helper.AppointmentHelper.create_all">
+<tt class="descname">create_all</tt><big>(</big><em>registered_subject</em>, <em>model_name</em>, <em>base_appt_datetime=None</em>, <em>dashboard_type=None</em><big>)</big><a class="reference internal" href="_modules/appointment_helper.html#AppointmentHelper.create_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#appointment_helper.AppointmentHelper.create_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates appointments for a registered subject based on a list of visit definitions if given model_name is a member of a schedule group.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>registered_subject: current subject
+model_name: model of the membership_form
+dashboard_type:</dd>
+</dl>
+<ol class="arabic simple">
+<li>Only create for visit_instance = 0</li>
+<li>If appointment exists, just update the appt_datetime</li>
+</ol>
+<p>visit_definition contains schedule group contains membership form</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="appointment_helper.AppointmentHelper.create_next_instance">
+<tt class="descname">create_next_instance</tt><big>(</big><em>base_appointment_instance</em>, <em>next_appt_datetime</em><big>)</big><a class="reference internal" href="_modules/appointment_helper.html#AppointmentHelper.create_next_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#appointment_helper.AppointmentHelper.create_next_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a continuation appointment given the base appointment instance (.0) and the next appt_datetime</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="appointment_helper.AppointmentHelper.delete_for_instance">
+<tt class="descname">delete_for_instance</tt><big>(</big><em>model_instance</em><big>)</big><a class="reference internal" href="_modules/appointment_helper.html#AppointmentHelper.delete_for_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#appointment_helper.AppointmentHelper.delete_for_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete appointments for this registered_subject for this model_instance but only if visit report not yet submitted</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bhp_appointment_helper.classes.AppointmentDateHelper">
+<em class="property">class </em><tt class="descclassname">bhp_appointment_helper.classes.</tt><tt class="descname">AppointmentDateHelper</tt><a class="headerlink" href="#bhp_appointment_helper.classes.AppointmentDateHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="bhp_appointment_helper.classes.AppointmentDateHelper.change_datetime">
+<tt class="descname">change_datetime</tt><big>(</big><em>best_appt_datetime</em>, <em>new_appt_datetime</em>, <em>site</em>, <em>visit_definition</em><big>)</big><a class="headerlink" href="#bhp_appointment_helper.classes.AppointmentDateHelper.change_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if an appointment datetime from the user is OK to accept.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bhp_appointment_helper.classes.AppointmentDateHelper.get_best_datetime">
+<tt class="descname">get_best_datetime</tt><big>(</big><em>appt_datetime</em>, <em>site</em>, <em>weekday=None</em><big>)</big><a class="headerlink" href="#bhp_appointment_helper.classes.AppointmentDateHelper.get_best_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the appointment datetime on insert.</p>
+<p>For example, may be configured to be on the same day as the base, not on holiday, etc.</p>
+<p>Note, appt_datetime comes from the membership_form model method get_registration_datetime</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bhp_appointment_helper.classes.AppointmentDateHelper.get_relative_datetime">
+<tt class="descname">get_relative_datetime</tt><big>(</big><em>base_appt_datetime</em>, <em>visit_definition</em><big>)</big><a class="headerlink" href="#bhp_appointment_helper.classes.AppointmentDateHelper.get_relative_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns appointment datetime relative to the base_appointment_datetime.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="models.html"
+                        title="next chapter">Models</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/classes.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >previous</a> |</li>
+        <li><a href="index.html">bhp_appointment_helper 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, erik van widenfelt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

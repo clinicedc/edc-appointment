@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>appointment_helper &mdash; bhp_appointment_helper 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="bhp_appointment_helper 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">bhp_appointment_helper 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for appointment_helper</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">get_model</span><span class="p">,</span> <span class="n">Max</span>
+<span class="kn">from</span> <span class="nn">bhp_visit.models</span> <span class="kn">import</span> <span class="n">VisitDefinition</span><span class="p">,</span> <span class="n">ScheduleGroup</span>
+<span class="c">#from edc.subject.visit_schedule.classes import VisitDefinitionHelper</span>
+<span class="kn">from</span> <span class="nn">appointment_date_helper</span> <span class="kn">import</span> <span class="n">AppointmentDateHelper</span>
+
+
+<div class="viewcode-block" id="AppointmentHelper"><a class="viewcode-back" href="../classes.html#appointment_helper.AppointmentHelper">[docs]</a><span class="k">class</span> <span class="nc">AppointmentHelper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AppointmentHelper.create_all"><a class="viewcode-back" href="../classes.html#appointment_helper.AppointmentHelper.create_all">[docs]</a>    <span class="k">def</span> <span class="nf">create_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registered_subject</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">base_appt_datetime</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dashboard_type</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates appointments for a registered subject based on a list of visit definitions if given model_name is a member of a schedule group.</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                registered_subject: current subject</span>
+<span class="sd">                model_name: model of the membership_form</span>
+<span class="sd">                dashboard_type:</span>
+
+<span class="sd">            1. Only create for visit_instance = 0</span>
+<span class="sd">            2. If appointment exists, just update the appt_datetime</span>
+
+<span class="sd">            visit_definition contains schedule group contains membership form</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># base_appt_datetime must come from the membership_form model and not from the appt_datetime</span>
+        <span class="c"># of the first appointment as the user may change this.</span>
+        <span class="c"># base_appt_datetime = kwargs.get(&quot;base_appt_datetime&quot;)</span>
+        <span class="k">if</span> <span class="n">ScheduleGroup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">membership_form__content_type_map__model</span><span class="o">=</span><span class="n">model_name</span><span class="p">):</span>
+            <span class="c"># get list of visits for scheduled group containing this model</span>
+            <span class="c"># get schedule_group</span>
+            <span class="n">schedule_group</span> <span class="o">=</span> <span class="n">ScheduleGroup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">membership_form__content_type_map__model</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+            <span class="c"># get membership_form model class of this schedule_group for this registered_subject</span>
+            <span class="n">membership_form_model</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="n">app_label</span><span class="o">=</span><span class="n">schedule_group</span><span class="o">.</span><span class="n">membership_form</span><span class="o">.</span><span class="n">content_type_map</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">membership_form_model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">registered_subject</span><span class="o">=</span><span class="n">registered_subject</span><span class="p">):</span>
+                <span class="c"># in some cases, send the base_appt_datetime, such as when</span>
+                <span class="c"># the visit_datetime is a next appt datetime.</span>
+                <span class="c"># But ideally, it is better to get this from</span>
+                <span class="c"># get_registration_datetime() on the model.</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">base_appt_datetime</span><span class="p">:</span>
+                    <span class="c"># determine base_appt_datetime using the membership_form instance</span>
+                    <span class="c"># for an existing membership form</span>
+                    <span class="n">membership_form</span> <span class="o">=</span> <span class="n">membership_form_model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">registered_subject</span><span class="o">=</span><span class="n">registered_subject</span><span class="p">)</span>
+                    <span class="n">base_appt_datetime</span> <span class="o">=</span> <span class="n">membership_form</span><span class="o">.</span><span class="n">get_registration_datetime</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c"># we may be calling this method as a new membership form is being inserted</span>
+                <span class="c"># once the instance is saved, the created attribute will = datetime.today()</span>
+                <span class="c">#base_appt_datetime = datetime.today()</span>
+
+                <span class="c"># i have decided that it is safer for the model_instance to return the</span>
+                <span class="c"># base_appt_datetime instead of assuming datetime.today(),</span>
+                <span class="c"># thus, the model save() method must have been called already.</span>
+                <span class="c"># ...see BaseRegisteredSubjectModel.save()</span>
+                <span class="c"># so if you get here throw an error.</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> method </span><span class="si">%s</span><span class="s"> cannot determine the registration model_instance. &quot;</span>
+                                     <span class="s">&quot;This is needed to call get_registration_datetime().&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],))</span>
+            <span class="n">visit_definitions</span> <span class="o">=</span> <span class="n">VisitDefinition</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">schedule_group</span><span class="o">=</span><span class="n">schedule_group</span><span class="p">)</span>
+            <span class="n">appointment_date_helper</span> <span class="o">=</span> <span class="n">AppointmentDateHelper</span><span class="p">()</span>
+            <span class="n">Appointment</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s">&#39;bhp_appointment&#39;</span><span class="p">,</span> <span class="s">&#39;appointment&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">visit_definition</span> <span class="ow">in</span> <span class="n">visit_definitions</span><span class="p">:</span>
+                <span class="c"># calculate the appointment date</span>
+                <span class="k">if</span> <span class="n">visit_definition</span><span class="o">.</span><span class="n">time_point</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c">#appt_datetime = self.best_appointment_datetime(appt_datetime=base_appt_datetime)</span>
+                    <span class="n">appt_datetime</span> <span class="o">=</span> <span class="n">appointment_date_helper</span><span class="o">.</span><span class="n">get_best_datetime</span><span class="p">(</span><span class="n">base_appt_datetime</span><span class="p">,</span> <span class="n">registered_subject</span><span class="o">.</span><span class="n">study_site</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">appt_datetime</span> <span class="o">=</span> <span class="n">appointment_date_helper</span><span class="o">.</span><span class="n">get_relative_datetime</span><span class="p">(</span><span class="n">base_appt_datetime</span><span class="p">,</span> <span class="n">visit_definition</span><span class="p">)</span>
+                <span class="c"># if appt exists, update appt_datetime</span>
+                <span class="k">if</span> <span class="n">Appointment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                            <span class="n">registered_subject</span><span class="o">=</span><span class="n">registered_subject</span><span class="p">,</span>
+                            <span class="n">visit_definition</span><span class="o">=</span><span class="n">visit_definition</span><span class="p">,</span>
+                            <span class="n">visit_instance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+                    <span class="n">appt</span> <span class="o">=</span> <span class="n">Appointment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                                <span class="n">registered_subject</span><span class="o">=</span><span class="n">registered_subject</span><span class="p">,</span>
+                                <span class="n">visit_definition</span><span class="o">=</span><span class="n">visit_definition</span><span class="p">,</span>
+                                <span class="n">visit_instance</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">appt</span><span class="o">.</span><span class="n">best_appt_datetime</span> <span class="o">!=</span> <span class="n">appt_datetime</span><span class="p">:</span>
+                        <span class="c"># the calculated appointment date does not match the best_appt_datetime</span>
+                        <span class="c"># which means you changed the date on the membership form and now</span>
+                        <span class="c"># need to correct the best_appt_datetime</span>
+                        <span class="n">appt</span><span class="o">.</span><span class="n">appt_datetime</span> <span class="o">=</span> <span class="n">appt_datetime</span>  <span class="c"># TODO: are you sure you want to change this date?&quot;</span>
+                        <span class="n">appt</span><span class="o">.</span><span class="n">best_appt_datetime</span> <span class="o">=</span> <span class="n">appt_datetime</span>
+                        <span class="n">appt</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="c"># else create a new appointment</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">Appointment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                        <span class="n">registered_subject</span><span class="o">=</span><span class="n">registered_subject</span><span class="p">,</span>
+                        <span class="n">visit_definition</span><span class="o">=</span><span class="n">visit_definition</span><span class="p">,</span>
+                        <span class="n">visit_instance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">appt_datetime</span><span class="o">=</span><span class="n">appt_datetime</span><span class="p">,</span>
+                        <span class="n">timepoint_datetime</span><span class="o">=</span><span class="n">appt_datetime</span><span class="p">,</span>
+                        <span class="n">dashboard_type</span><span class="o">=</span><span class="n">dashboard_type</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AppointmentHelper.delete_for_instance"><a class="viewcode-back" href="../classes.html#appointment_helper.AppointmentHelper.delete_for_instance">[docs]</a>    <span class="k">def</span> <span class="nf">delete_for_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_instance</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Delete appointments for this registered_subject for this model_instance but only if visit report not yet submitted &quot;&quot;&quot;</span>
+        <span class="c">#visit_definitions = self.list_visit_definitions_for_model(model_instance.registered_subject, model_instance._meta.object_name.lower())</span>
+        <span class="n">visit_definitions</span> <span class="o">=</span> <span class="n">VisitDefinition</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">list_all_for_model</span><span class="p">(</span><span class="n">model_instance</span><span class="o">.</span><span class="n">registered_subject</span><span class="p">,</span> <span class="n">model_instance</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">object_name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="n">Appointment</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s">&#39;bhp_appointment&#39;</span><span class="p">,</span> <span class="s">&#39;appointment&#39;</span><span class="p">)</span>
+        <span class="c"># only delete appointments without a visit model</span>
+        <span class="n">appointments</span> <span class="o">=</span> <span class="n">Appointment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">registered_subject</span><span class="o">=</span><span class="n">model_instance</span><span class="o">.</span><span class="n">registered_subject</span><span class="p">,</span> <span class="n">visit_definition__in</span><span class="o">=</span><span class="n">visit_definitions</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">visit_model</span> <span class="o">=</span> <span class="n">model_instance</span><span class="o">.</span><span class="n">get_visit_model</span><span class="p">(</span><span class="n">model_instance</span><span class="p">)</span>
+        <span class="c"># find the most recent visit model instance and delete any appointments after that</span>
+        <span class="k">for</span> <span class="n">appointment</span> <span class="ow">in</span> <span class="n">appointments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visit_model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">appointment</span><span class="o">=</span><span class="n">appointment</span><span class="p">):</span>
+                <span class="n">appointment</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">appointment</span> <span class="ow">in</span> <span class="n">appointments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visit_model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">appointment</span><span class="o">=</span><span class="n">appointment</span><span class="p">):</span>
+                <span class="n">appointment</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">count</span>
+</div>
+<div class="viewcode-block" id="AppointmentHelper.create_next_instance"><a class="viewcode-back" href="../classes.html#appointment_helper.AppointmentHelper.create_next_instance">[docs]</a>    <span class="k">def</span> <span class="nf">create_next_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_appointment_instance</span><span class="p">,</span> <span class="n">next_appt_datetime</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Creates a continuation appointment given the base appointment instance (.0) and the next appt_datetime &quot;&quot;&quot;</span>
+        <span class="n">appointment</span> <span class="o">=</span> <span class="n">base_appointment_instance</span>
+        <span class="n">Appointment</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s">&#39;bhp_appointment&#39;</span><span class="p">,</span> <span class="s">&#39;appointment&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">Appointment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="n">registered_subject</span><span class="o">=</span><span class="n">appointment</span><span class="o">.</span><span class="n">registered_subject</span><span class="p">,</span>
+            <span class="n">visit_definition</span><span class="o">=</span><span class="n">appointment</span><span class="o">.</span><span class="n">visit_definition</span><span class="p">,</span>
+            <span class="n">appt_datetime</span><span class="o">=</span><span class="n">next_appt_datetime</span><span class="p">):</span>
+            <span class="n">aggr</span> <span class="o">=</span> <span class="n">Appointment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">registeredsubject</span><span class="o">=</span><span class="n">appointment</span><span class="o">.</span><span class="n">registered_subject</span><span class="p">,</span>
+                <span class="n">visit_definition</span><span class="o">=</span><span class="n">appointment</span><span class="o">.</span><span class="n">visit_definition</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">Max</span><span class="p">(</span><span class="s">&#39;visit_instance&#39;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">aggr</span><span class="p">:</span>
+                <span class="n">appointment_date_helper</span> <span class="o">=</span> <span class="n">AppointmentDateHelper</span><span class="p">()</span>
+                <span class="c"># check if there are rules to determine a better appt_datetime</span>
+                <span class="n">appt_datetime</span> <span class="o">=</span> <span class="n">appointment_date_helper</span><span class="o">.</span><span class="n">get_best_datetime</span><span class="p">(</span><span class="n">next_appt_datetime</span><span class="p">,</span> <span class="n">appointment</span><span class="o">.</span><span class="n">registered_subject</span><span class="o">.</span><span class="n">study_site</span><span class="p">)</span>
+                <span class="n">next_visit_instance</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">aggr</span><span class="p">[</span><span class="s">&#39;visit_instance__max&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+                <span class="n">Appointment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                    <span class="n">registered_subject</span><span class="o">=</span><span class="n">appointment</span><span class="o">.</span><span class="n">registered_subject</span><span class="p">,</span>
+                    <span class="n">visit_definition</span><span class="o">=</span><span class="n">appointment</span><span class="o">.</span><span class="n">visit_definition</span><span class="p">,</span>
+                    <span class="n">visit_instance</span><span class="o">=</span><span class="n">next_visit_instance</span><span class="p">,</span>
+                    <span class="n">appt_datetime</span><span class="o">=</span><span class="n">appt_datetime</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">bhp_appointment_helper 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, erik van widenfelt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

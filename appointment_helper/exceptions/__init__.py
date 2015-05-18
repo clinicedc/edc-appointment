@@ -1,0 +1,4 @@
+
+
+class AppointmentCreateError(Exception):
+    pass
