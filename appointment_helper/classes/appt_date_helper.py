@@ -65,7 +65,7 @@ class ApptDateHelper(object):
             elif unit == 'H':
                 next_appt_datetime = self.appt_datetime + relativedelta(hours=interval)
             else:
-                raise AttributeError("Cannot calculate net appointment date, visit_definition.base_interval_unit must be Y,M,D or H. Got %s" % (unit,))
+                raise AttributeError("Cannot calculate net edc_appointment date, visit_definition.base_interval_unit must be Y,M,D or H. Got %s" % (unit,))
         return self.next_appt_datetime
 
 

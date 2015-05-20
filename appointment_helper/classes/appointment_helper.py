@@ -28,12 +28,12 @@ class AppointmentHelper(object):
                 dashboard_type:
 
             1. Only create for visit_instance = 0
-            2. If appointment exists, just update the appt_datetime
+            2. If edc_appointment exists, just update the appt_datetime
 
             visit_definition contains schedule group contains membership form
         """
         # base_appt_datetime must come from the membership_form model and not from the appt_datetime
-        # of the first appointment as the user may change this.
+        # of the first edc_appointment as the user may change this.
         appointments = []
         default_appt_type = self._get_default_appt_type(registered_subject)
         if source != 'BaseAppointmentMixin':  # just a temporary check to ensure this is called by the signal
@@ -61,14 +61,14 @@ class AppointmentHelper(object):
             visit_definitions = visit_definitions or VisitDefinition.objects.filter(
                 schedule_group=schedule_group).order_by('time_point')
             appointment_date_helper = AppointmentDateHelper()
-            Appointment = get_model('appointment', 'appointment')
+            Appointment = get_model('edc_appointment', 'edc_appointment')
             if not visit_definitions:
                 raise AppointmentCreateError('No visit_definitions found for membership form class {0} '
                                              'in schedule group {1}. Expected at least one visit '
                                              'definition to be associated with schedule group {1}.'.format(
                                                  membership_form_model, schedule_group))
             for visit_definition in visit_definitions:
-                # calculate the appointment date for new appointments
+                # calculate the edc_appointment date for new appointments
                 if visit_definition.time_point == 0:
                     appt_datetime = appointment_date_helper.get_best_datetime(
                         base_appt_datetime, registered_subject.study_site)
@@ -82,7 +82,7 @@ class AppointmentHelper(object):
                         visit_instance='0')
                     td = appointment.best_appt_datetime - appt_datetime
                     if td.days == 0 and abs(td.seconds) > 59:
-                        # the calculated appointment date does not match
+                        # the calculated edc_appointment date does not match
                         # the best_appt_datetime (not within 59 seconds)
                         # which means you changed the date on the membership form and now
                         # need to correct the best_appt_datetime
@@ -110,7 +110,7 @@ class AppointmentHelper(object):
         model_instance but only if visit report not yet submitted """
         visit_definitions = VisitDefinition.objects.list_all_for_model(
             model_instance.registered_subject, model_instance._meta.object_name.lower())
-        Appointment = get_model('appointment', 'appointment')
+        Appointment = get_model('edc_appointment', 'edc_appointment')
         # only delete appointments without a visit model
         appointments = Appointment.objects.using(using).filter(
             registered_subject=model_instance.registered_subject, visit_definition__in=visit_definitions)
@@ -128,10 +128,10 @@ class AppointmentHelper(object):
         return count
 
     def create_next_instance(self, base_appointment_instance, next_appt_datetime, using=None):
-        """ Creates a continuation appointment given the base appointment
+        """ Creates a continuation edc_appointment given the base edc_appointment
         instance (.0) and the next appt_datetime """
         appointment = base_appointment_instance
-        Appointment = get_model('appointment', 'appointment')
+        Appointment = get_model('edc_appointment', 'edc_appointment')
         if not Appointment.objects.using(using).filter(
                 registered_subject=appointment.registered_subject,
                 visit_definition=appointment.visit_definition,
@@ -155,7 +155,7 @@ class AppointmentHelper(object):
     def check_appt_status(self, appointment, using):
         """Checks the appt_status relative to the visit tracking form and ScheduledEntryMetaData.
         """
-        # for an existing appointment, check if there is a visit tracking form already on file
+        # for an existing edc_appointment, check if there is a visit tracking form already on file
         if not appointment.visit_definition.visit_tracking_content_type_map:
             raise ImproperlyConfigured(
                 'Unable to determine the visit tracking model. '
@@ -173,7 +173,7 @@ class AppointmentHelper(object):
                     appointment=appointment)
             scheduled_entry_helper = ScheduledEntryMetaDataHelper(appointment, visit_model_instance)
             if not scheduled_entry_helper.show_scheduled_entries():
-                # visit reason implies no data will be collected, so set appointment to Done
+                # visit reason implies no data will be collected, so set edc_appointment to Done
                 appointment.appt_status = DONE
             else:
                 ScheduledEntryMetaData = get_model('entry_meta_data', 'ScheduledEntryMetaData')
@@ -191,7 +191,7 @@ class AppointmentHelper(object):
                         appointment.appt_status = DONE
                 elif appointment.appt_status in [NEW, CANCELLED, IN_PROGRESS]:
                     appointment.appt_status = IN_PROGRESS
-                    # only one appointment can be "in_progress", so look for any others in progress and change
+                    # only one edc_appointment can be "in_progress", so look for any others in progress and change
                     # to Done or Incomplete, depending on ScheduledEntryMetaData (if any NEW => incomplete)
                     ScheduledEntryMetaData = get_model('entry_meta_data', 'ScheduledEntryMetaData')
                     RequisitionMetaData = get_model('entry_meta_data', 'RequisitionMetaData')
@@ -219,7 +219,7 @@ class AppointmentHelper(object):
         return appointment
 
     def _get_default_appt_type(self, registered_subject):
-        """Returns the default appointment date fetched from either the subject
+        """Returns the default edc_appointment date fetched from either the subject
         specific setting or the global setting."""
         default_appt_type = None
         try:
