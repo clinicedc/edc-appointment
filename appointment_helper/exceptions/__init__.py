@@ -1,4 +1,0 @@
-
-
-class AppointmentCreateError(Exception):
-    pass
