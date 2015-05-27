@@ -1,1 +1,5 @@
 Django>=1.8.2
+django-simple-history
+edc-base
+edc-visit-schedule
+
