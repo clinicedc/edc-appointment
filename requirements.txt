@@ -1,7 +1,6 @@
 Django>=1.8.2
 django-simple-history
 edc-base
-edc-data-manager
 edc-visit-schedule
 edc_content_type_map
 edc_registration
