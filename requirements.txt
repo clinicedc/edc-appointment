@@ -1,7 +1,9 @@
 Django>=1.8.2
 django-simple-history
+django-crypto-fields
 edc-base
 edc-visit-schedule
-edc_content_type_map
-edc_registration
-edc_entry
+edc-constants
+edc-registration
+edc-entry
+edc-calendar
