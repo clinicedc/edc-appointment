@@ -11,7 +11,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='edc-appointment',
-    version='0.1.2',
+    version='0.1.dev',
     author=u'Erik van Widenfelt',
     author_email='ew2789@gmail.com',
     packages=find_packages(),
@@ -22,11 +22,6 @@ setup(
     long_description=README,
     zip_safe=False,
     keywords='django appointments research clinical trials',
-    install_requires=[
-        'Django>=1.8',
-        'django-extensions>=1.5.5',
-        'unipath>=1.1',
-    ],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
