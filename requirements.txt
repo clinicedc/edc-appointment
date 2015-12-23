@@ -1,8 +1,0 @@
-Django>=1.6
-django-simple-history
-django-crypto-fields
-edc-base
-edc-constants
-edc-registration
-edc-entry
-edc-calendar
