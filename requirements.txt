@@ -24,5 +24,3 @@ git+https://github.com/botswana-harvard/edc-sync@develop#egg=edc-sync
 git+https://github.com/botswana-harvard/edc-visit-tracking@develop#egg=edc-visit-tracking
 git+https://github.com/botswana-harvard/edc@develop#egg=edc
 git+https://github.com/erikvw/django-revision@develop#egg=django-revision
-
-edc.
