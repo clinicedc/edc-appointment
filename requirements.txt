@@ -19,6 +19,7 @@ git+https://github.com/botswana-harvard/edc-constants@develop#egg=edc-constants
 git+https://github.com/botswana-harvard/edc-content-type-map@develop#egg=edc-content_type_map
 git+https://github.com/botswana-harvard/edc-crypto-fields@develop#egg=edc-crypto-fields
 git+https://github.com/botswana-harvard/edc-device@develop#egg=edc-device
+git+https://github.com/botswana-harvard/edc-export@develop#egg=edc-export
 git+https://github.com/botswana-harvard/edc-identifier@develop#egg=edc-identifier
 git+https://github.com/botswana-harvard/edc-lab@develop#egg=edc-lab
 git+https://github.com/botswana-harvard/edc-locator@develop#egg=edc-locator
