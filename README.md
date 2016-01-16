@@ -8,12 +8,15 @@ As per a research protocol, participant data is collected on a predefined schedu
 creates appointments for participant visits when given a visit schedule (from edc_visit_scedule).
 
 * appointments are created for each timepoint of the data collection schedule; 
-* appointments are created when a special form is completed;
-* the special form can be a registration form, consent or eligibility checklist that uses the
-appointment mixin;
+* appointments are created by forms that use the `AppointmentMixin`, for example a registration form, consent or eligibility checklist;
 * a participant may "register" to more than one cohort linked to data collection schedule by having more than
 one registration form using the mixin; 
-* data management can "close" a timepoint to prevent further modification using the TimePointStatus model
-and mixin.
+* The `TimePointStatusMixin` detects when data covered by an appointment is open or clsed for further editing.
+
+### `AppointmentMixin`
+
+Creates Appointments
+
+Deletes Appointments
 
 
