@@ -32,22 +32,22 @@ ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
-DEPENDENCY_APPS = [
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
-
-EXAMPLE_APPS = [
+    'crispy_forms',
+    'edc_base',
+    'edc_content_type_map.apps.EdcContentTypeAppConfig',
+    'edc_visit_schedule',
+    'example.apps.EdcMetaDataAppConfig',
     'example.apps.EdcAppointmentAppConfig',
-    'example.apps.DjangoCryptoFieldsApp',
+    'example.apps.DjangoCryptoFieldsAppConfig',
     'example.apps.ExampleAppConfig',
 ]
-
-INSTALLED_APPS = DEPENDENCY_APPS + EXAMPLE_APPS
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,3 +132,4 @@ LANGUAGES = (
     ('tn', 'Setswana'),
     ('en', 'English'),
 )
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

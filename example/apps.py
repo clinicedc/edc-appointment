@@ -1,12 +1,8 @@
 from django.apps import AppConfig
-from django_crypto_fields.apps import DjangoCryptoFieldsAppConfig
-from edc_appointment.apps import EdcAppointmentAppConfig
+from django_crypto_fields.apps import DjangoCryptoFieldsAppConfig as DjangoCryptoFieldsAppConfigParent
 
-
-class EdcAppointmentAppConfig(EdcAppointmentAppConfig):
-    name = 'edc_appointment'
-    verbose_name = 'Edc Appointment'
-    model = ('example', 'appointment')
+from edc_appointment.apps import EdcAppointmentAppConfig as EdcAppointmentAppConfigParent
+from edc_meta_data.apps import EdcMetaDataAppConfig as EdcMetaDataAppConfigParent
 
 
 class ExampleAppConfig(AppConfig):
@@ -15,7 +11,14 @@ class ExampleAppConfig(AppConfig):
     institution = 'Botswana-Harvard AIDS Institute Partnership'
 
 
-class DjangoCryptoFieldsApp(DjangoCryptoFieldsAppConfig):
-    name = 'django_crypto_fields'
+class EdcAppointmentAppConfig(EdcAppointmentAppConfigParent):
+    model = ('example', 'appointment')
+
+
+class EdcMetaDataAppConfig(EdcMetaDataAppConfigParent):
+    model_attrs = [('example', 'crfmetadata'), ('example', 'requisitionmetadata')]
+
+
+class DjangoCryptoFieldsAppConfig(DjangoCryptoFieldsAppConfigParent):
     model = ('example', 'crypt')
     crypt_model_using = 'default'
