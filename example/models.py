@@ -10,6 +10,12 @@ from edc_visit_tracking.models.visit_model_mixin import VisitModelMixin
 from edc_visit_tracking.models.previous_visit_mixin import PreviousVisitMixin
 from edc_visit_tracking.models.crf_model_mixin import CrfModelMixin
 from edc_meta_data.crf_meta_data_managers import CrfMetaDataManager
+from edc_consent.models.base_consent import BaseConsent
+from edc_consent.models.fields.bw.identity_fields_mixin import IdentityFieldsMixin
+from edc_consent.models.fields.sample_collection_fields_mixin import SampleCollectionFieldsMixin
+from edc_consent.models.fields.vulnerability_fields_mixin import VulnerabilityFieldsMixin
+from edc_consent.models.fields.personal_fields_mixin import PersonalFieldsMixin
+from edc_consent.models.fields.site_fields_mixin import SiteFieldsMixin
 
 
 class Crypt(CryptModelMixin, BaseUuidModel):
@@ -35,6 +41,20 @@ class RegisteredSubject(BaseUuidModel):
 
     class Meta:
         app_label = 'example'
+
+
+class SubjectConsent(
+        BaseConsent, IdentityFieldsMixin, SampleCollectionFieldsMixin,
+        SiteFieldsMixin, PersonalFieldsMixin, VulnerabilityFieldsMixin, BaseUuidModel):
+
+    objects = models.Manager()
+
+    class Meta:
+        app_label = 'example'
+        unique_together = (
+            ('subject_identifier', 'version'),
+            ('identity', 'version'),
+            ('first_name', 'dob', 'initials', 'version'))
 
 
 class Appointment(AppointmentModelMixin, BaseUuidModel):
