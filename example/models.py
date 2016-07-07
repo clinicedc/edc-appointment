@@ -62,7 +62,7 @@ class SubjectConsent(
 
 class Appointment(AppointmentModelMixin, BaseUuidModel):
 
-    registered_subject = models.ForeignKey(RegisteredSubject)
+    # registered_subject = models.ForeignKey(RegisteredSubject)
 
     history = HistoricalRecords()
 
