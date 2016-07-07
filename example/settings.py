@@ -49,6 +49,13 @@ INSTALLED_APPS = [
     'example.apps.ExampleAppConfig',
 ]
 
+
+if 'test' in sys.argv:
+    MIGRATION_MODULES = {
+        'example': None,
+        'edc_content_type_map': None,
+        'edc_visit_schedule': None}
+
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

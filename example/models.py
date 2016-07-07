@@ -1,5 +1,7 @@
 from django.db import models
 
+from datetime import datetime
+
 from django_crypto_fields.crypt_model_mixin import CryptModelMixin
 from edc_base.model.models import BaseUuidModel
 from edc_appointment.mixins import AppointmentModelMixin, AppointmentMixin
@@ -124,8 +126,11 @@ class TestModel(CrfMetaDataMixin, AppointmentMixin, BaseUuidModel):
 
     f1 = models.CharField(max_length=10, null=True)
 
+    def get_registration_datetime(self):
+        return datetime.today()
+
     def save(self, *args, **kwargs):
-        self.prepare_appointments()
+        self.prepare_appointments('default')
         super(TestModel, self).save(*args, **kwargs)
 
     class Meta:
