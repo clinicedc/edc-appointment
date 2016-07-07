@@ -19,6 +19,7 @@ from edc_consent.models.fields.sample_collection_fields_mixin import SampleColle
 from edc_consent.models.fields.vulnerability_fields_mixin import VulnerabilityFieldsMixin
 from edc_consent.models.fields.personal_fields_mixin import PersonalFieldsMixin
 from edc_consent.models.fields.site_fields_mixin import SiteFieldsMixin
+from django.utils import timezone
 
 
 class Crypt(CryptModelMixin, BaseUuidModel):
@@ -128,7 +129,7 @@ class TestModel(CrfMetaDataMixin, AppointmentMixin, BaseUuidModel):
     f1 = models.CharField(max_length=10, null=True)
 
     def get_registration_datetime(self):
-        return datetime.today()
+        return timezone.now()
 
     def save(self, *args, **kwargs):
         self.prepare_appointments('default')
