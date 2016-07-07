@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'edc_base',
-    'edc_content_type_map.apps.EdcContentTypeAppConfig',
-    'edc_visit_schedule',
+    # 'edc_visit_schedule.apps.EdcVisitScheduleAppConfig',
     'example.apps.EdcMetaDataAppConfig',
     'example.apps.EdcAppointmentAppConfig',
     'example.apps.DjangoCryptoFieldsAppConfig',
@@ -58,7 +57,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'edc_appointment.urls'
+ROOT_URLCONF = 'example.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'edc_appointment.wsgi.application'
+WSGI_APPLICATION = 'example.wsgi.application'
 
 
 # Database
