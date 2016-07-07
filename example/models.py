@@ -4,7 +4,8 @@ from datetime import datetime
 
 from django_crypto_fields.crypt_model_mixin import CryptModelMixin
 from edc_base.model.models import BaseUuidModel
-from edc_appointment.mixins import AppointmentModelMixin, AppointmentMixin
+from edc_appointment.model_mixins import AppointmentModelMixin
+from edc_appointment.appointment_mixin import AppointmentMixin
 from simple_history.models import HistoricalRecords
 from edc_meta_data.model_mixins import CrfMetaDataModelMixin, RequisitionMetaDataModelMixin
 from edc_meta_data.crf_meta_data_mixin import CrfMetaDataMixin
