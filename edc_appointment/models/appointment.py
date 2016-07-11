@@ -3,12 +3,12 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.validators import RegexValidator
 from django.db import models, transaction
+from simple_history.models import HistoricalRecords as AuditTrail
 
-from edc_base.audit_trail import AuditTrail
 from edc_base.model.models import BaseUuidModel
 from edc_constants.constants import COMPLETE_APPT, NEW_APPT, CLOSED, CANCELLED, INCOMPLETE, UNKEYED, IN_PROGRESS
 from edc_registration.models import RegisteredSubject
-from edc_sync.models import SyncModelMixin
+from edc_sync.models import SyncModelMixin, SyncHistoricalRecords
 from edc_visit_schedule.models import VisitDefinition
 
 from ..choices import APPT_TYPE, APPT_STATUS
@@ -112,7 +112,7 @@ class Appointment(SyncModelMixin, BaseUuidModel):
 
     objects = AppointmentManager()
 
-    history = AuditTrail()
+    history = SyncHistoricalRecords()
 
     def __unicode__(self):
         return "{0} {1} for {2}.{3}".format(
@@ -136,7 +136,7 @@ class Appointment(SyncModelMixin, BaseUuidModel):
     def natural_key(self):
         """Returns a natural key."""
         return (self.visit_instance, ) + self.visit_definition.natural_key() + self.registered_subject.natural_key()
-    natural_key.dependencies = ['edc_registration.registeredsubject', 'edc_visit_tracking.visitdefinition']
+    natural_key.dependencies = ['edc_registration.registeredsubject', 'edc_visit_schedule.visitdefinition']
 
     def validate_visit_instance(self, exception_cls=None):
         exception_cls = exception_cls or ValidationError

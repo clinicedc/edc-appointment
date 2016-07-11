@@ -1,15 +1,15 @@
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import get_model
+from django.apps import apps as django_apps
+from django_crypto_fields.fields import EncryptedTextField
+from django.utils import timezone
+from simple_history.models import HistoricalRecords as AuditTrail
 
-from edc_base.audit_trail import AuditTrail
-from edc_base.encrypted_fields import EncryptedTextField
 from edc_base.model.models import BaseUuidModel
 from edc_constants.choices import YES_NO_NA
 from edc_constants.constants import CLOSED, OPEN, NEW_APPT, IN_PROGRESS, NOT_APPLICABLE
-from edc_sync.models import SyncModelMixin
-from django.utils import timezone
+from edc_sync.models import SyncModelMixin, SyncHistoricalRecords
 
 
 class TimePointStatusManager(models.Manager):
@@ -71,7 +71,7 @@ class TimePointStatus(SyncModelMixin, BaseUuidModel):
 
     objects = TimePointStatusManager()
 
-    history = AuditTrail()
+    history = SyncHistoricalRecords()
 
     def __unicode__(self):
         return "{}".format(self.status.upper())
@@ -112,12 +112,12 @@ class TimePointStatus(SyncModelMixin, BaseUuidModel):
                             appointment.appt_status.upper()))
 
     def get_appointments(self):
-        Appointment = get_model('edc_appointment', 'Appointment')
+        Appointment = django_apps.get_model('edc_appointment', 'Appointment')
         return Appointment.objects.filter(time_point_status__pk=self.pk)
 
     @property
     def base_appointment(self):
-        Appointment = get_model('edc_appointment', 'Appointment')
+        Appointment = django_apps.get_model('edc_appointment', 'Appointment')
         return Appointment.objects.get(
             time_point_status__pk=self.pk, visit_instance='0')
 

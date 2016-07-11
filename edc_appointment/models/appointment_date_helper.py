@@ -2,7 +2,7 @@ import copy
 
 from datetime import datetime, timedelta
 
-from django.db.models import get_model
+from django.apps import apps
 
 from edc_configuration.models import GlobalConfiguration
 
@@ -50,7 +50,7 @@ class AppointmentDateHelper(object):
 
     def get_relative_datetime(self, base_appt_datetime, visit_definition):
         """ Returns appointment datetime relative to the base_appointment_datetime."""
-        VisitDefinition = get_model('edc_visit_schedule', 'VisitDefinition')
+        VisitDefinition = apps.get_model('edc_visit_schedule', 'VisitDefinition')
         appt_datetime = base_appt_datetime + VisitDefinition.objects.relativedelta_from_base(
             visit_definition=visit_definition)
         return self.get_best_datetime(appt_datetime, base_appt_datetime.isoweekday())
@@ -139,7 +139,7 @@ class AppointmentDateHelper(object):
             appt_dates = [appointment.appt_datetime.date() for appointment in appointments]
             appt_date_counts = dict((i, appt_dates.count(i)) for i in appt_dates)
             # if desired date is not maxed out, use it
-            if appt_date_counts.get(my_appt_date) < appointments_per_day_max:
+            if not appt_date_counts.get(my_appt_date) or appt_date_counts.get(my_appt_date) < appointments_per_day_max:
                 appt_date = my_appt_date
             else:
                 # look for an alternative date
