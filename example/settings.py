@@ -14,6 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APP_LABEL = 'example'
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'simple_history',
-    'crispy_forms',
     'edc_base',
-    'django_crypto_fields.apps.DjangoCryptoFieldsAppConfig',
-    'edc_appointment.apps.EdcAppointmentAppConfig',
+    # 'edc_visit_schedule.apps.EdcVisitScheduleAppConfig',
+    'example.apps.EdcMetaDataAppConfig',
+    'example.apps.EdcAppointmentAppConfig',
+    'example.apps.DjangoCryptoFieldsAppConfig',
     'example.apps.ExampleAppConfig',
 ]
 
@@ -56,7 +57,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'edc_appointment.urls'
+ROOT_URLCONF = 'example.urls'
 
 TEMPLATES = [
     {
@@ -74,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'edc_appointment.wsgi.application'
+WSGI_APPLICATION = 'example.wsgi.application'
 
 
 # Database
@@ -128,4 +129,3 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 GIT_DIR = BASE_DIR
-APP_LABEL = 'example'
