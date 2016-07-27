@@ -137,3 +137,11 @@ class TestModel(CrfMetaDataMixin, AppointmentMixin, BaseUuidModel):
 
     class Meta:
         app_label = 'example'
+
+
+class RequisitionOne(CrfModelMixin, BaseUuidModel):
+
+    subject_visit = models.ForeignKey(SubjectVisit)
+
+    class Meta:
+        app_label = 'example'

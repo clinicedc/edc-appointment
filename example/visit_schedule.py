@@ -7,18 +7,12 @@ from example.models import TestModel, SubjectVisit
 crfs = (
     Crf(show_order=10, app_label='example', model_name='CrfOne'),
     Crf(show_order=20, app_label='example', model_name='CrfTwo'),
-#     Crf(show_order=30, app_label='example', model_name='CrfThree'),
-#     Crf(show_order=40, app_label='example', model_name='CrfFour'),
-#     Crf(show_order=50, app_label='example', model_name='CrfFive'),
 )
 
 requisitions = (
-#     Requisition(
-#         show_order=10, app_label='example', model_name='RequisitionOne',
-#         panel_name='Research Blood Draw', panel_type='TEST', aliqout_type_alpha_code='WB'),
-#     Requisition(
-#         show_order=20, app_label='example', model_name='RequisitionTwo',
-#         panel_name='Viral Load', panel_type='TEST', aliqout_type_alpha_code='WB'),
+    Requisition(
+        show_order=10, app_label='example', model_name='RequisitionOne',
+        panel_name='Research Blood Draw', panel_type='TEST', aliqout_type_alpha_code='WB'),
 )
 
 example_visit_schedule = VisitSchedule(
