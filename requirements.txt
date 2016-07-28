@@ -1,5 +1,6 @@
 Django
 django-simple-history
+factory-boy
 git+https://github.com/erikvw/django-revision@develop#egg=django_revision
 git+https://github.com/botswana-harvard/edc-base@develop#egg=edc_base
 git+https://github.com/erikvw/django-crypto-fields@develop#egg=django_crypto_fields
