@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'edc_base',
+    'crispy_forms',
     # 'edc_visit_schedule.apps.EdcVisitScheduleAppConfig',
     'example.apps.EdcMetaDataAppConfig',
     'example.apps.EdcAppointmentAppConfig',
