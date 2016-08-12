@@ -33,6 +33,8 @@ example_visit_schedule.add_visit(
     schedule_name='schedule-1',
     time_point=0,
     base_interval=0,
+    lower_window=2,
+    upper_window=30,
     visit_model=SubjectVisit,
     requisitions=requisitions,
     crfs=crfs)
@@ -42,6 +44,8 @@ example_visit_schedule.add_visit(
     schedule_name='schedule-1',
     time_point=1,
     base_interval=1,
+    lower_window=-31,
+    upper_window=60,
     visit_model=SubjectVisit,
     requisitions=requisitions,
     crfs=crfs)

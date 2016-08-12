@@ -3,6 +3,7 @@ from django.db import models
 from django_crypto_fields.crypt_model_mixin import CryptModelMixin
 from edc_base.model.models import BaseUuidModel
 from edc_appointment.model_mixins import AppointmentModelMixin
+from edc_appointment.requires_appointment_mixin import RequiresAppointmentMixin
 from edc_appointment.appointment_mixin import AppointmentMixin
 from simple_history.models import HistoricalRecords
 from edc_meta_data.model_mixins import CrfMetaDataModelMixin, RequisitionMetaDataModelMixin
@@ -39,7 +40,7 @@ class RegisteredSubject(BaseUuidModel):
         app_label = 'example'
 
 
-class Appointment(AppointmentModelMixin, BaseUuidModel):
+class Appointment(AppointmentModelMixin, RequiresAppointmentMixin, BaseUuidModel):
 
     # registered_subject = models.ForeignKey(RegisteredSubject)
 
