@@ -1,11 +1,11 @@
-from django.apps import AppConfig
-from django_crypto_fields.apps import DjangoCryptoFieldsAppConfig as DjangoCryptoFieldsAppConfigParent
+from django.apps import AppConfig as DjangoAppConfig
+from django_crypto_fields.apps import AppConfig as DjangoCryptoFieldsAppConfigParent
 
-from edc_appointment.apps import EdcAppointmentAppConfig as EdcAppointmentAppConfigParent
-from edc_meta_data.apps import EdcMetaDataAppConfig as EdcMetaDataAppConfigParent
+from edc_appointment.apps import AppConfig as EdcAppointmentAppConfigParent
+from edc_meta_data.apps import AppConfig as EdcMetaDataAppConfigParent
 
 
-class ExampleAppConfig(AppConfig):
+class AppConfig(DjangoAppConfig):
     name = 'example'
     verbose_name = 'Example Project'
     institution = 'Botswana-Harvard AIDS Institute Partnership'
