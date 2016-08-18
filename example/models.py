@@ -20,7 +20,7 @@ from edc_visit_tracking.models.visit_model_mixin import VisitModelMixin
 from edc_visit_tracking.models.previous_visit_mixin import PreviousVisitMixin
 from edc_visit_tracking.models.crf_model_mixin import CrfModelMixin
 
-from example_registration.models import RegisteredSubject
+from edc_registration.models import RegisteredSubjectModelMixin
 
 
 class Crypt(CryptModelMixin, BaseUuidModel):
@@ -28,6 +28,12 @@ class Crypt(CryptModelMixin, BaseUuidModel):
     class Meta:
         app_label = 'example'
         unique_together = (('hash', 'algorithm', 'mode'),)
+
+
+class RegisteredSubject(RegisteredSubjectModelMixin, BaseUuidModel):
+
+    class Meta:
+        app_label = 'example'
 
 
 class Appointment(AppointmentModelMixin, RequiresAppointmentMixin, BaseUuidModel):
