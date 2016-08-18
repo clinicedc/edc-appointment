@@ -41,7 +41,15 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'edc_base',
-    'edc_appointment.apps.AppConfig',
+    'django_crypto_fields.apps.AppConfig',
+    'example.apps.EdcAppointmentAppConfig',
+    'edc_meta_data.apps.AppConfig',
+    'edc_visit_schedule.apps.EdcVisitScheduleAppConfig',
+    'edc_visit_tracking',
+    'example.apps.AppConfig',
+    'django_revision.apps.AppConfig',
+    'edc_content_type_map.apps.AppConfig',
+    'example_registration.apps.AppConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -55,7 +63,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'edc_appointment.urls'
+ROOT_URLCONF = 'example.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'edc_appointment.wsgi.application'
+WSGI_APPLICATION = 'example.wsgi.application'
 
 
 # Database
@@ -127,4 +135,4 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 GIT_DIR = BASE_DIR
-APP_LABEL = 'edc_appointment'
+APP_LABEL = 'example'
