@@ -1,18 +1,26 @@
+from django.utils import timezone
+
 from django.db import models
 
 from django_crypto_fields.crypt_model_mixin import CryptModelMixin
+
 from edc_base.model.models import BaseUuidModel
+
 from edc_appointment.model_mixins import AppointmentModelMixin
 from edc_appointment.requires_appointment_mixin import RequiresAppointmentMixin
 from edc_appointment.appointment_mixin import AppointmentMixin
+from edc_meta_data.crf_meta_data_managers import CrfMetaDataManager
+
 from simple_history.models import HistoricalRecords
+
 from edc_meta_data.model_mixins import CrfMetaDataModelMixin, RequisitionMetaDataModelMixin
 from edc_meta_data.crf_meta_data_mixin import CrfMetaDataMixin
+
 from edc_visit_tracking.models.visit_model_mixin import VisitModelMixin
 from edc_visit_tracking.models.previous_visit_mixin import PreviousVisitMixin
 from edc_visit_tracking.models.crf_model_mixin import CrfModelMixin
-from edc_meta_data.crf_meta_data_managers import CrfMetaDataManager
-from django.utils import timezone
+
+from example_registration.models import RegisteredSubject
 
 
 class Crypt(CryptModelMixin, BaseUuidModel):
@@ -22,27 +30,7 @@ class Crypt(CryptModelMixin, BaseUuidModel):
         unique_together = (('hash', 'algorithm', 'mode'),)
 
 
-class RegisteredSubject(BaseUuidModel):
-
-    subject_identifier = models.CharField(
-        verbose_name="Subject Identifier",
-        max_length=50,
-        blank=True,
-        db_index=True,
-        unique=True)
-
-    study_site = models.CharField(
-        max_length=50,
-        null=True,
-        blank=True)
-
-    class Meta:
-        app_label = 'example'
-
-
 class Appointment(AppointmentModelMixin, RequiresAppointmentMixin, BaseUuidModel):
-
-    # registered_subject = models.ForeignKey(RegisteredSubject)
 
     history = HistoricalRecords()
 
