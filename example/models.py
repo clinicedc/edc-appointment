@@ -1,26 +1,16 @@
 from django.utils import timezone
 
 from django.db import models
-
 from django_crypto_fields.crypt_model_mixin import CryptModelMixin
 
+from edc_appointment.model_mixins import (
+    AppointmentModelMixin, RequiresAppointmentModelMixin, CreateAppointmentsMixin)
 from edc_base.model.models import BaseUuidModel
-
-from edc_appointment.model_mixins import AppointmentModelMixin
-from edc_appointment.requires_appointment_mixin import RequiresAppointmentMixin
-from edc_appointment.appointment_mixin import AppointmentMixin
-from edc_meta_data.crf_meta_data_managers import CrfMetaDataManager
-
-from simple_history.models import HistoricalRecords
-
+from edc_meta_data.managers import CrfMetaDataManager
 from edc_meta_data.model_mixins import CrfMetaDataModelMixin, RequisitionMetaDataModelMixin
-from edc_meta_data.crf_meta_data_mixin import CrfMetaDataMixin
-
-from edc_visit_tracking.models.visit_model_mixin import VisitModelMixin
-from edc_visit_tracking.models.previous_visit_mixin import PreviousVisitMixin
-from edc_visit_tracking.models.crf_model_mixin import CrfModelMixin
-
-from edc_registration.models import RegisteredSubjectModelMixin
+from edc_meta_data.mixins import CrfMetaDataMixin
+from edc_visit_tracking.model_mixins import VisitModelMixin, PreviousVisitModelMixin, CrfModelMixin
+from edc_registration.model_mixins import RegisteredSubjectModelMixin
 
 
 class Crypt(CryptModelMixin, BaseUuidModel):
@@ -36,9 +26,7 @@ class RegisteredSubject(RegisteredSubjectModelMixin, BaseUuidModel):
         app_label = 'example'
 
 
-class Appointment(AppointmentModelMixin, RequiresAppointmentMixin, BaseUuidModel):
-
-    history = HistoricalRecords()
+class Appointment(AppointmentModelMixin, RequiresAppointmentModelMixin, BaseUuidModel):
 
     class Meta:
         app_label = 'example'
@@ -64,7 +52,7 @@ class RequisitionMetaData(RequisitionMetaDataModelMixin, BaseUuidModel):
         app_label = 'example'
 
 
-class SubjectVisit(CrfMetaDataMixin, PreviousVisitMixin, VisitModelMixin, BaseUuidModel):
+class SubjectVisit(CrfMetaDataMixin, PreviousVisitModelMixin, VisitModelMixin, BaseUuidModel):
 
     appointment = models.OneToOneField(Appointment)
 
@@ -96,7 +84,7 @@ class CrfTwo(CrfMetaDataMixin, BaseUuidModel):
         app_label = 'example'
 
 
-class TestModel(CrfMetaDataMixin, AppointmentMixin, BaseUuidModel):
+class TestModel(CrfMetaDataMixin, CreateAppointmentsMixin, BaseUuidModel):
     """Triggers creation of appointments."""
 
     f1 = models.CharField(max_length=10, null=True)
