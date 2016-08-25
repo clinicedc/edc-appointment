@@ -6,14 +6,14 @@ from edc_registration.apps import AppConfig as EdcRegistrationAppConfigParent
 
 
 class AppConfig(DjangoAppConfig):
-    name = 'example'
+    name = 'edc_example'
     verbose_name = 'Example Project'
     institution = 'Botswana-Harvard AIDS Institute Partnership'
 
 
 class EdcAppointmentAppConfig(EdcAppointmentAppConfigParent):
-    model = ('example', 'appointment')
+    model = ('edc_example', 'appointment')
 
 
 class EdcRegistrationAppConfigAppConfig(EdcRegistrationAppConfigParent):
-    model = ('example', 'registeredsubject')
+    model = ('edc_example', 'registeredsubject')

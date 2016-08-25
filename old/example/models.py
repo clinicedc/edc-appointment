@@ -16,20 +16,20 @@ from edc_registration.model_mixins import RegisteredSubjectModelMixin
 class Crypt(CryptModelMixin, BaseUuidModel):
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
         unique_together = (('hash', 'algorithm', 'mode'),)
 
 
 class RegisteredSubject(RegisteredSubjectModelMixin, BaseUuidModel):
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
 
 
 class Appointment(AppointmentModelMixin, RequiresAppointmentModelMixin, BaseUuidModel):
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
 
 
 class CrfMetaData(CrfMetaDataModelMixin, BaseUuidModel):
@@ -39,7 +39,7 @@ class CrfMetaData(CrfMetaDataModelMixin, BaseUuidModel):
     appointment = models.ForeignKey(Appointment, related_name='+')
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
 
 
 class RequisitionMetaData(RequisitionMetaDataModelMixin, BaseUuidModel):
@@ -49,7 +49,7 @@ class RequisitionMetaData(RequisitionMetaDataModelMixin, BaseUuidModel):
     appointment = models.ForeignKey(Appointment, related_name='+')
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
 
 
 class SubjectVisit(CrfMetaDataMixin, PreviousVisitModelMixin, VisitModelMixin, BaseUuidModel):
@@ -57,7 +57,7 @@ class SubjectVisit(CrfMetaDataMixin, PreviousVisitModelMixin, VisitModelMixin, B
     appointment = models.OneToOneField(Appointment)
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
 
 
 class CrfOne(CrfModelMixin, BaseUuidModel):
@@ -69,7 +69,7 @@ class CrfOne(CrfModelMixin, BaseUuidModel):
     entry_meta_data_manager = CrfMetaDataManager(SubjectVisit)
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
 
 
 class CrfTwo(CrfMetaDataMixin, BaseUuidModel):
@@ -81,7 +81,7 @@ class CrfTwo(CrfMetaDataMixin, BaseUuidModel):
     entry_meta_data_manager = CrfMetaDataManager(SubjectVisit)
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
 
 
 class TestModel(CrfMetaDataMixin, CreateAppointmentsMixin, BaseUuidModel):
@@ -97,7 +97,7 @@ class TestModel(CrfMetaDataMixin, CreateAppointmentsMixin, BaseUuidModel):
         super(TestModel, self).save(*args, **kwargs)
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
 
 
 class RequisitionOne(CrfModelMixin, BaseUuidModel):
@@ -105,4 +105,4 @@ class RequisitionOne(CrfModelMixin, BaseUuidModel):
     subject_visit = models.ForeignKey(SubjectVisit)
 
     class Meta:
-        app_label = 'example'
+        app_label = 'edc_example'
