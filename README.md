@@ -14,6 +14,8 @@ A model mixin for the Appointment model. Each project may have one appointment m
 
 A model mixin for the model that triggers the creation of appointments. This is typically an enrollment model.
 
+Adds the model field `facility`. The value is used to link to the correct facility in `app_config`.
+
 ### Customizing appointment scheduling by `Facility`
 
 Appointment scheduling can be customized per `facility` or clinic:
