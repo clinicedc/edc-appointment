@@ -18,7 +18,7 @@ A model mixin for the model that triggers the creation of appointments. This is 
 
 Appointment scheduling can be customized per `facility` or clinic:
 
-Add each facility to `app_config.facilities` specifying the facility name, weekdays open and the maximum number of slots available per day:
+Add each facility to `app_config.facilities` specifying the facility `name`, `days` open and the maximum number of `slots` available per day:
 
     from edc_appointment.apps import AppConfig as EdcAppointmentAppConfig
 
