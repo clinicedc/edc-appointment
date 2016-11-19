@@ -57,5 +57,4 @@ If holidays are entered (in model `Holiday`) and the appointment lands on a holi
     available_datetime = facility.available_datetime(suggested_datetime)
     print(available_datetime)  # 2015-09-29 00:00:00, TU
 
-You can also set a maximum number of appointments allowed per day. As with the holiday example above, the appointment
-date will be incremented forward to an allowed weekday that has not reached the maximum number of appointments.
+The maximum number of possible scheduling slots per day is configured in `app_config`. As with the holiday example above, the appointment date will be incremented forward to a day with an available slot.
