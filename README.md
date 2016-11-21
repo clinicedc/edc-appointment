@@ -51,9 +51,9 @@ If holidays are entered (in model `Holiday`) and the appointment lands on a holi
     
     Holiday.objects.create(
         name='Id-ul-Adha (Feast of the Sacrifice)',
-        date=tz.localize(datetime(2015, 9, 24))
+        date=date(2015, 9, 24)
     )
-    suggested_datetime = timezone.make_aware(datetime(2015, 9, 24))  # TH
+    suggested_datetime = timezone.make_aware(datetime(2015, 9, 24), timezone=pytz.timezone('UTC'))  # TH
     available_datetime = facility.available_datetime(suggested_datetime)
     print(available_datetime)  # 2015-09-29 00:00:00, TU
 
