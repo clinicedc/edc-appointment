@@ -4,7 +4,9 @@
 
 This module works closely with `edc_visit_tracking` and `edc_visit_schedule`.
 
-In a research protocol participant data is collected on a predefined visit schedule. The visit schedule is defined in `edc-visit-schedul`. `edc-appointment` creates appointments for participants based the selected visit schedule.
+Subject data is collected on predefined timepoints. We describe these data collection timepoints in a `visit_schedule` as provided by `edc-visit-schedule`. In `edc-appointment` timepoints are represented by appointments. `edc-appointment` provides classes for creating and managing appointments.
+
+See also `edc-visit-schedule`. 
 
 ### `AppointmentModelMixin`
 
@@ -16,6 +18,20 @@ A model mixin for the Appointment model. Each project may have one appointment m
             consent_model = 'edc_example.subjectconsent'
             app_label = 'edc_example'
 
+
+### Appointment is a required foreignkey for the visit report
+
+The `Appointment` model is a required foreignkey for the visit report. Be sure to set `on_delete=PROTECT`.
+
+    class SubjectVisit(VisitModelMixin, OffstudyMixin, CreatesMetadataModelMixin, RequiresConsentMixin, BaseUuidModel):
+    
+        appointment = models.OneToOneField(Appointment, on_delete=PROTECT)
+    
+        objects = VisitModelManager()
+    
+        class Meta(VisitModelMixin.Meta):
+            consent_model = 'edc_example.subjectconsent'
+            app_label = 'edc_example'
 
 ### `CreatesAppointmentsModelMixin`
 
@@ -126,5 +142,12 @@ The `previous_appointment` acts as expected:
     >>> previous_appointment.visit_code
     AttributeError: 'NoneType' object has no attribute 'visit_code'
 
+### `delete_for_subject_after_date()`
+
+This method will delete all appointments for a subject after a given datetime. See also `edc-offstudy`.
+
+`Appointment` is usually a foreignkey of a visit model. It's important when using this method to ensure that when declaring `Appointment` as a foreignkey you explicitly set `on_delete=PROTECT`. If you don't, the deletion will cascade to other related instances -- and that's bad. 
+
+    appointment = models.OneToOneField(Appointment, on_delete=PROTECT)
 
 
