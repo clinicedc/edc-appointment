@@ -60,6 +60,53 @@ If holidays are entered (in model `Holiday`) and the appointment lands on a holi
 The maximum number of possible scheduling slots per day is configured in `app_config`. As with the holiday example above, the appointment date will be incremented forward to a day with an available slot.
 
 
-### Available Manager Methods
+### Available Appointment Model Manager Methods
 
-`first_appointment()`, `last_appointment()`, `next_appointment()`, `previous_appointment()`
+The `Appointment` model is declared with `AppointmentManager`. It has several useful methods. 
+
+#### `first_appointment()`, `last_appointment()`
+
+Returns the first (or last) appointment. If just the `subject_identifier` is provided, the first appointment of the protocol for the subject is returned. To be more specific, provide {subject_identifier=`subject_identifier`, visit_schedule_name=`visit_schedule_name`}.
+To be even more specific,  {subject_identifier=`subject_identifier`, visit_schedule_name=`visit_schedule_name`, schedule_name=`schedule_name`}.
+
+The most common usage is to just provide these values with an appointment instance:
+
+    first_appointment = Appointment.objects.first_appointment(appointment=appointment)
+
+#### `next_appointment()`, `previous_appointment()`
+
+The next and previous appointment are relative to the schedule and a visit_code within that schedule. If next is called on the last appointment in the sequence `None` is returned. If previous is called on the first appointment in the sequence `None` is returned.
+
+For example, in a sequence of appointment 1000, 2000, 3000, 4000:
+
+    >>> appointment.visit_code
+    1000
+    >>> next_appointment = Appointment.objects.next_appointment(appointment=appointment)
+    >>> next_appointment.visit_code
+    2000
+
+But you can also pass an appointment instance and pass the visit code:
+
+    >>> appointment.visit_code
+    1000
+    >>> next_appointment = Appointment.objects.next_appointment(appointment=appointment, visit_code=3000)
+    >>> next_appointment.visit_code
+    4000
+If you ask for the next appointment from the last, `None` is returned:
+
+    >>> appointment.visit_code
+    4000
+    >>> next_appointment = Appointment.objects.next_appointment(appointment=appointment, visit_code=3000)
+    >>> next_appointment.visit_code
+    AttributeError: 'NoneType' object has no attribute 'visit_code'
+
+The `previous_appointment` acts as expected:
+
+    >>> appointment.visit_code
+    1000
+    >>> previous_appointment = Appointment.objects.previous_appointment(appointment=appointment)
+    >>> previous_appointment.visit_code
+    AttributeError: 'NoneType' object has no attribute 'visit_code'
+
+
+
