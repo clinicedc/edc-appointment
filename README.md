@@ -66,8 +66,8 @@ The `Appointment` model is declared with `AppointmentManager`. It has several us
 
 #### `first_appointment()`, `last_appointment()`
 
-Returns the first (or last) appointment. If just the `subject_identifier` is provided, the first appointment of the protocol for the subject is returned. To be more specific, provide {subject_identifier=`subject_identifier`, visit_schedule_name=`visit_schedule_name`}.
-To be even more specific,  {subject_identifier=`subject_identifier`, visit_schedule_name=`visit_schedule_name`, schedule_name=`schedule_name`}.
+Returns the first (or last) appointment. If just the `subject_identifier` is provided, the first appointment of the protocol for the subject is returned. To be more specific, provide `{subject_identifier=subject_identifier, visit_schedule_name=visit_schedule_name}`.
+To be even more specific,  `{subject_identifier=subject_identifier, visit_schedule_name=visit_schedule_name, schedule_name=schedule_name}`.
 
 The most common usage is to just provide these values with an appointment instance:
 
