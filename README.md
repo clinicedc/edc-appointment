@@ -30,6 +30,9 @@ Adds the model field `facility`. The value of field `facility` tells the `Create
             consent_model = 'edc_example.subjectconsent'
             app_label = 'edc_example'
 
+When `Enrollment` declared above is saved, one appointment will be created for the subject for each `visit` in schedule `schedule1` of visit_schedule `subject_visit_schedule`. 
+
+Note: the value for `facility` must be provided by the user, either through the form interface or programmatically. 
 
 ### Customizing appointment scheduling by `Facility`
 
