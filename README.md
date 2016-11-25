@@ -58,3 +58,8 @@ If holidays are entered (in model `Holiday`) and the appointment lands on a holi
     print(available_datetime)  # 2015-09-29 00:00:00, TU
 
 The maximum number of possible scheduling slots per day is configured in `app_config`. As with the holiday example above, the appointment date will be incremented forward to a day with an available slot.
+
+
+### Available Manager Methods
+
+`first_appointment()`, `last_appointment()`, `next_appointment()`, `previous_appointment()`
