@@ -19,7 +19,7 @@ A model mixin for the Appointment model. Each project may have one appointment m
 
 ### `CreatesAppointmentsModelMixin`
 
-A model mixin for the model that triggers the creation of appointments. This is typically an enrollment model.
+A model mixin for the model that triggers the creation of appointments when the model is saved. This is typically an enrollment model.
 
 Adds the model field `facility`. The value of field `facility` tells the `CreateAppointmentsMixin` to create appointments for the subject on dates that are available at the `facility`.
 
