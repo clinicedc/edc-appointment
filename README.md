@@ -142,7 +142,7 @@ The `previous_appointment` acts as expected:
     >>> previous_appointment.visit_code
     AttributeError: 'NoneType' object has no attribute 'visit_code'
 
-### `delete_for_subject_after_date()`
+#### `delete_for_subject_after_date()`
 
 This method will delete all appointments for a subject after a given datetime. See also `edc-offstudy`.
 
