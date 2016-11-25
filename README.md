@@ -8,13 +8,28 @@ In a research protocol participant data is collected on a predefined visit sched
 
 ### `AppointmentModelMixin`
 
-A model mixin for the Appointment model. Each project may have one appointment model. 
+A model mixin for the Appointment model. Each project may have one appointment model. For example:
+
+    class Appointment(AppointmentModelMixin, RequiresConsentMixin, BaseUuidModel):
+    
+        class Meta(AppointmentModelMixin.Meta):
+            consent_model = 'edc_example.subjectconsent'
+            app_label = 'edc_example'
+
 
 ### `CreatesAppointmentsModelMixin`
 
 A model mixin for the model that triggers the creation of appointments. This is typically an enrollment model.
 
-Adds the model field `facility`. The value is used to link to the correct facility in `app_config`.
+Adds the model field `facility`. The value of field `facility` tells the `CreateAppointmentsMixin` to create appointments for the subject on dates that are available at the `facility`.
+
+    class Enrollment(EnrollmentModelMixin, CreateAppointmentsMixin, RequiresConsentMixin, BaseUuidModel):
+    
+        class Meta(EnrollmentModelMixin.Meta):
+            visit_schedule_name = 'subject_visit_schedule.schedule1'
+            consent_model = 'edc_example.subjectconsent'
+            app_label = 'edc_example'
+
 
 ### Customizing appointment scheduling by `Facility`
 
