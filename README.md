@@ -66,10 +66,10 @@ Add each facility to `app_config.facilities` specifying the facility `name`, `da
 
 To schedule an appointment that falls on a day that the clinic is open, isn't a holiday and isn't already over-booked:
 
-    from django.utils import timezone
+    from edc_base.utils import get_utcnow
     from .facility import Facility
     
-    suggested_datetime = timezone.now()
+    suggested_datetime = get_utcnow()
     available_datetime = facility.available_datetime(suggested_datetime)
 
 
@@ -87,7 +87,7 @@ If holidays are entered (in model `Holiday`) and the appointment lands on a holi
         name='Id-ul-Adha (Feast of the Sacrifice)',
         date=date(2015, 9, 24)
     )
-    suggested_datetime = timezone.make_aware(datetime(2015, 9, 24), timezone=pytz.timezone('UTC'))  # TH
+    suggested_datetime = timezone.make_aware(datetime(2015, 9, 24), timezone=pytz.utc)  # TH
     available_datetime = facility.available_datetime(suggested_datetime)
     print(available_datetime)  # 2015-09-29 00:00:00, TU
 
