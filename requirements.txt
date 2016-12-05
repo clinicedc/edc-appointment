@@ -19,3 +19,5 @@ git+https://github.com/botswana-harvard/edc-example@develop#edc_example
 git+https://github.com/botswana-harvard/edc-consent@develop#edc_consent
 git+https://github.com/botswana-harvard/edc-timepoint@develop#edc_timepoint
 git+https://github.com/botswana-harvard/edc-protocol@develop#edc_protocol
+git+https://github.com/botswana-harvard/edc-lab@develop#edc_lab
+git+https://github.com/botswana-harvard/edc-offstudy@develop#edc_offstudy
