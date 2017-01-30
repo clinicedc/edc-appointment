@@ -1,25 +1,9 @@
+dist: trusty
+sudo: required
+
 language: python
 python:
-#  - "2.7"
-#  - "3.2"
-#  - "3.3"
-#  - "3.4"
-   - "3.5.1"
-#  - "nightly"
-env:
-#  - DJANGO_VERSION=1.6
-#  - DJANGO_VERSION=1.7
-#  - DJANGO_VERSION=1.8
-   - DJANGO_VERSION=1.9.7
-addons:
-  apt_packages:
-     - swig
-     - libssl-dev
-     - libssl0.9.8
-     - python-m2crypto
-     - libcups2-dev
-     - unixodbc-dev
-     - python-mysqldb
+  - "3.5.1"
 
 services:
   - mysql
@@ -29,22 +13,21 @@ before_install:
     - "sh -e /etc/init.d/xvfb start"
     - sleep 3 # give xvfb some time to start
 
+branches:
+  only:
+    - develop
+
 install:
   - pip install --upgrade pip
-  - pip install -q Django==$DJANGO_VERSION
+  - pip install -r requirements.txt
   - pip install flake8
   - pip install coveralls
-  - pip install M2Crypto
-  - pip install pyodbc
-  - pip install pycups
-  - pip install factory-boy
-  - pip install mysqlclient==1.3.7
-  - pip install -q -r requirements.txt
 
 before_script:
   - flake8 edc_appointment
-  - mysql -e 'create database edc;'
-  - mysql -e 'create database edc_lab;'
+  - mysql -e 'create database edc character set utf8;'
+  - python manage.py makemigrations
+  - python manage.py migrate
 
 script: 
   - coverage run --source=edc_appointment manage.py test
