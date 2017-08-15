@@ -1,3 +1,4 @@
+edc_appointment/migrations/*
 etc/*
 *.py[cod]
 *.sh
