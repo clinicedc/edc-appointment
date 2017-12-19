@@ -12,7 +12,7 @@ See also `edc-visit-schedule`.
 
 A model mixin for the Appointment model. Each project may have one appointment model. For example:
 
-    class Appointment(AppointmentModelMixin, RequiresConsentMixin, BaseUuidModel):
+    class Appointment(AppointmentModelMixin, RequiresConsentModelMixin, BaseUuidModel):
     
         class Meta(AppointmentModelMixin.Meta):
             consent_model = 'edc_example.subjectconsent'
@@ -23,7 +23,7 @@ A model mixin for the Appointment model. Each project may have one appointment m
 
 The `Appointment` model is a required foreignkey for the visit report. Be sure to set `on_delete=PROTECT`.
 
-    class SubjectVisit(VisitModelMixin, OffstudyMixin, CreatesMetadataModelMixin, RequiresConsentMixin, BaseUuidModel):
+    class SubjectVisit(VisitModelMixin, OffstudyMixin, CreatesMetadataModelMixin, RequiresConsentModelMixin, BaseUuidModel):
     
         appointment = models.OneToOneField(Appointment, on_delete=PROTECT)
     
@@ -39,7 +39,7 @@ A model mixin for the model that triggers the creation of appointments when the 
 
 Adds the model field `facility`. The value of field `facility` tells the `CreateAppointmentsMixin` to create appointments for the subject on dates that are available at the `facility`.
 
-    class Enrollment(EnrollmentModelMixin, CreateAppointmentsMixin, RequiresConsentMixin, BaseUuidModel):
+    class Enrollment(EnrollmentModelMixin, CreateAppointmentsMixin, RequiresConsentModelMixin, BaseUuidModel):
     
         class Meta(EnrollmentModelMixin.Meta):
             visit_schedule_name = 'subject_visit_schedule.schedule1'
