@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/botswana-harvard/edc-appointment.svg?branch=develop)](https://travis-ci.org/botswana-harvard/edc-appointment) [![Coverage Status](https://coveralls.io/repos/botswana-harvard/edc-appointment/badge.svg?branch=develop&service=github)](https://coveralls.io/github/botswana-harvard/edc-appointment?branch=develop)
+[![Build Status](https://travis-ci.org/clinicedc/edc-appointment.svg?branch=develop)](https://travis-ci.org/clinicedc/edc-appointment) [![Coverage Status](https://coveralls.io/repos/clinicedc/edc-appointment/badge.svg?branch=develop&service=github)](https://coveralls.io/github/clinicedc/edc-appointment?branch=develop)
 
 # edc-appointment
 
