@@ -15,9 +15,12 @@ git+https://github.com/clinicedc/edc-model-wrapper@develop#edc_model_wrapper
 git+https://github.com/clinicedc/edc-offstudy@develop#edc_offstudy
 git+https://github.com/clinicedc/edc-dashboard@develop#edc_dashboard
 git+https://github.com/clinicedc/edc-facility@develop#edc-facility
+git+https://github.com/clinicedc/edc-metadata@develop#egg=edc-metadata
+git+https://github.com/clinicedc/edc-metadata-rules@develop#egg=edc-metadata-rules
 git+https://github.com/clinicedc/edc-model-admin@develop#edc-model-admin
 git+https://github.com/clinicedc/edc-form-validators@develop#edc-form-validators
 git+https://github.com/clinicedc/edc-metadata@develop#edc-metadata
 git+https://github.com/clinicedc/edc-metadata-rules@develop#edc-metadata-rules
 git+https://github.com/clinicedc/edc-reference@develop#edc-reference
 git+https://github.com/clinicedc/edc-label@develop#edc-label
+git+https://github.com/clinicedc/edc-model-fields@develop#egg=edc-model-fields
