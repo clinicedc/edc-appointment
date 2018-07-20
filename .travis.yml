@@ -1,31 +1,36 @@
-dist: trusty
-sudo: required
 language: python
+
 python:
-- 3.5.1
+- 3.6
+- 3.7
+
+dist: xenial
+
+sudo: true
+
 services:
 - mysql
-before_install:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- sleep 3
+
+addons:
+  apt_packages:
+     - libcups2-dev
+
 branches:
   only:
   - develop
+
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
 - pip install flake8
 - pip install coveralls
+
 before_script:
 - flake8 edc_appointment
 - mysql -e 'create database edc character set utf8;'
-- python manage.py makemigrations
-- python manage.py migrate
+
 script:
 - coverage run --source=edc_appointment manage.py test
+
 after_success:
 - coveralls
-notifications:
-  slack:
-    secure: A8PW3YuezlUmJyY7KEPuQSOkL03kct/TfSKr9UFmJ5EPWd3jbXjyV6iGsdHqpvfJRfxuAjue+nBNku/4j/aKZNiM4EZE8av0Kx5c1NOPYIfbqR5c0fi5WS+pcl5lAEqU/HQazZ2h1HmMZmjhBG9EeC+5a889Elu+oXwbx7CNkrZ7wG9z5HBMT9Ji3uHXvUPxDGegJlPfkRIwi02F38HtGNDx/a//aOvKYiR4ECl3+vw0OXmQNHMnN8wUNpO5Nn7fSFndFTdVp3q2miyATWcwyWkDH3WUlqqM3f0DrtcyzRgkIv8ON2q9o06tLICy6q9WgaoUJ/Z0oRvDgEfWIaCG+s9VrCu1g06fSmg2SAI5oi68FMkUt0opcflzbuFoo+lYfo4IJS4VCgTGEbSKoSWu19zRYCDKKVu0UFHg/LExkPWUXCIL/IQA2wVxQVZ0uTa67d2FSwo3f7vM87ut397Q+5PdZGYUj4h3ZDcH5gyloIjg3d7PIUEO1a3Dm3AiBHBa9CyS9BEvHWAwY8Tl9Cbje9+DCyB5IYp4td6iSIpTwPdTk31c+kAFsREdoSzoTT1hPKXwJUNLt9DQEvPWgnMFFHXEdU5NsQ3+AG1WigAAgO005CJoHS3wVICD7APaSfpRZehmaPgxsYdtD4rZc1mGe/9/eu+KYmoNrJVxekjkw5s=
