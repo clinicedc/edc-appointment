@@ -21,7 +21,7 @@ setup(
     include_package_data=True,
     url='http://github/clinicedc/edc-appointment',
     license='GPL licence, see LICENCE',
-    description='Edc edc_appointment module for clinicedc/edc projects',
+    description='Appointment module for clinicedc/edc projects',
     long_description=README,
     zip_safe=False,
     keywords='django appointments research clinical trials',
