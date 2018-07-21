@@ -1,3 +1,5 @@
+|pypi| |travis| |coverage|
+
 edc-appointment
 ---------------
 
@@ -136,3 +138,12 @@ This method will delete all appointments for a subject after a given datetime. S
     appointment = models.OneToOneField(Appointment, on_delete=PROTECT)
 
 
+
+.. |pypi| image:: https://img.shields.io/pypi/v/django-collect-offline.svg
+    :target: https://pypi.python.org/pypi/django-collect-offline
+    
+.. |travis| image:: https://travis-ci.org/erikvw/django-collect-offline.svg?branch=develop
+    :target: https://travis-ci.org/erikvw/django-collect-offline
+    
+.. |coverage| image:: https://coveralls.io/repos/github/erikvw/django-collect-offline/badge.svg?branch=develop
+    :target: https://coveralls.io/github/erikvw/django-collect-offline?branch=develop
