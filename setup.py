@@ -26,12 +26,12 @@ setup(
     zip_safe=False,
     keywords='django appointments research clinical trials',
     install_requires=[
-        'edc_model_admin',
+        'edc-model-admin',
         'edc-base',
         'edc-facility',
         'edc-metadata',
         'edc-timepoint',
-        'edc_visit_schedule'
+        'edc-visit-schedule'
     ],
     classifiers=[
         'Environment :: Web Environment',
