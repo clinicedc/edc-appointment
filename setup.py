@@ -25,6 +25,14 @@ setup(
     long_description=README,
     zip_safe=False,
     keywords='django appointments research clinical trials',
+    install_requires=[
+        'edc_model_admin',
+        'edc-base',
+        'edc-facility',
+        'edc-metadata',
+        'edc-timepoint',
+        'edc_visit_schedule'
+    ],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
