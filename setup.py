@@ -30,6 +30,7 @@ setup(
         'edc-base',
         'edc-facility',
         'edc-metadata',
+        'edc-metadata-rules',
         'edc-timepoint',
         'edc-visit-schedule'
     ],
