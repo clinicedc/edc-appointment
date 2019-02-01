@@ -1,3 +1,6 @@
-include AUTHORS CHANGES README.rst LICENSE VERSION
+include AUTHORS CHANGES LICENSE VERSION
+include MANIFEST.in
+include *.rst
+include *.txt
 recursive-include edc_appointment/templates *
-recursive-include docs *
+recursive-include edc_appointment/static *
