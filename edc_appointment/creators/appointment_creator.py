@@ -41,7 +41,6 @@ class AppointmentCreator:
         self.visit = visit
         self.visit_code_sequence = visit_code_sequence or 0
         self.timepoint = timepoint
-        # timepoint_datetime (required)
         try:
             if is_naive(timepoint_datetime):
                 raise ValueError(
