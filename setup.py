@@ -4,6 +4,7 @@ from setuptools import setup
 from setuptools import find_packages
 from os.path import join, abspath, normpath, dirname
 
+
 with open(join(dirname(__file__), 'README.rst')) as readme:
     README = readme.read()
 
