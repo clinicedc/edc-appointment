@@ -38,6 +38,7 @@ installed_apps = [
     'edc_metadata_rules.apps.AppConfig',
     'edc_timepoint.apps.AppConfig',
     'edc_registration.apps.AppConfig',
+    "edc_offstudy.apps.AppConfig",
     'edc_protocol.apps.AppConfig',
     'edc_visit_tracking.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
