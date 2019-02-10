@@ -1,4 +1,4 @@
-|pypi| |travis| |coverage|
+|pypi| |travis| |codecov| |downloads|
 
 edc-appointment
 ---------------
@@ -139,11 +139,14 @@ This method will delete all appointments for a subject after a given datetime. S
 
 
 
-.. |pypi| image:: https://img.shields.io/pypi/v/django-collect-offline.svg
-    :target: https://pypi.python.org/pypi/django-collect-offline
+.. |pypi| image:: https://img.shields.io/pypi/v/edc-appointment.svg
+    :target: https://pypi.python.org/pypi/edc-appointment
     
-.. |travis| image:: https://travis-ci.org/erikvw/django-collect-offline.svg?branch=develop
-    :target: https://travis-ci.org/erikvw/django-collect-offline
+.. |travis| image:: https://travis-ci.org/clinicedc/edc-appointment.svg?branch=develop
+    :target: https://travis-ci.org/clinicedc/edc-appointment
     
-.. |coverage| image:: https://coveralls.io/repos/github/erikvw/django-collect-offline/badge.svg?branch=develop
-    :target: https://coveralls.io/github/erikvw/django-collect-offline?branch=develop
+.. |codecov| image:: https://codecov.io/gh/clinicedc/edc-appointment/branch/develop/graph/badge.svg
+  :target: https://codecov.io/gh/clinicedc/edc-appointment
+
+.. |downloads| image:: https://pepy.tech/badge/edc-appointment
+   :target: https://pepy.tech/project/edc-appointment
