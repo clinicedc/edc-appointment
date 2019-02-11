@@ -1,4 +1,4 @@
 [run]
 include = edc_appointment/*
-omit = edc_appointment/tests/*
+omit = edc_appointment/tests/*,edc_appointment/migrations/*
 branch = 1
