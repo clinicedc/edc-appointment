@@ -38,6 +38,7 @@ setup(
         'edc-facility',
         'edc-metadata',
         'edc-metadata-rules',
+        'edc-model-admin',
         'edc_offstudy',
         'edc-timepoint',
         'edc-visit-schedule'
