@@ -45,7 +45,7 @@ setup(
         'edc-sites',
         'edc-timepoint',
         'edc-utils',
-        'edc-visit-schedule'
+        'edc-visit-schedule',
         'edc-offstudy',
     ],
     classifiers=[
