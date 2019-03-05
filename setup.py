@@ -41,7 +41,6 @@ setup(
         'edc-metadata-rules',
         'edc-model',
         'edc-model-admin',
-        'edc-model-admin',
         'edc-sites',
         'edc-timepoint',
         'edc-utils',
