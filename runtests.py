@@ -33,6 +33,7 @@ installed_apps = [
     'django_revision.apps.AppConfig',
     'edc_base.apps.AppConfig',
     'edc_device.apps.AppConfig',
+    'edc_dashboard.apps.AppConfig',
     'edc_identifier.apps.AppConfig',
     'edc_metadata.apps.AppConfig',
     'edc_metadata_rules.apps.AppConfig',
@@ -79,6 +80,7 @@ DEFAULT_SETTINGS = dict(
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'edc_dashboard.middleware.DashboardMiddleware',
     ],
 
     LANGUAGE_CODE='en-us',
