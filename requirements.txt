@@ -1,2 +1,0 @@
-edc-locator
-edc-identifier

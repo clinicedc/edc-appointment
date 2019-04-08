@@ -33,7 +33,6 @@ setup(
     zip_safe=False,
     keywords='django appointments research clinical trials',
     install_requires=[
-        'edc-base',
         'edc-dashboard',
         'edc-facility',
         'edc_form_validators',
