@@ -9,7 +9,9 @@ Subject data is collected on predefined timepoints. We describe these data colle
 
 See also ``edc-visit-schedule``. 
 
-**AppointmentModelMixin**
+
+AppointmentModelMixin
++++++++++++++++++++++
 
 A model mixin for the Appointment model. Each project may have one appointment model. For example:
 
@@ -22,7 +24,8 @@ A model mixin for the Appointment model. Each project may have one appointment m
             app_label = 'edc_example'
 
 
-**Appointment is a required foreignkey for the visit report**
+Appointment is a required foreignkey for the visit report
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The ``Appointment`` model is a required foreignkey for the visit report. Be sure to set ``on_delete=PROTECT``.
 
@@ -39,7 +42,9 @@ The ``Appointment`` model is a required foreignkey for the visit report. Be sure
             consent_model = 'edc_example.subjectconsent'
             app_label = 'edc_example'
 
-**CreatesAppointmentsModelMixin**
+
+CreatesAppointmentsModelMixin
++++++++++++++++++++++++++++++
 
 A model mixin for the model that triggers the creation of appointments when the model is saved. This is typically an enrollment model.
 
@@ -59,17 +64,21 @@ When ``Enrollment`` declared above is saved, one appointment will be created for
 
 Note: the value for ``facility`` must be provided by the user, either through the form interface or programmatically. 
 
-**Customizing appointment scheduling by ``Facility``**
+
+Customizing appointment scheduling by ``Facility``
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 see ``edc_facility``
+
 
 Available Appointment Model Manager Methods
 ===========================================
 
 The ``Appointment`` model is declared with ``AppointmentManager``. It has several useful methods. 
 
-**first_appointment(), last_appointment()**
 
+first_appointment() last_appointment()
+++++++++++++++++++++++++++++++++++++++
 
 Returns the first (or last) appointment. If just the ``subject_identifier`` is provided, the first appointment of the protocol for the subject is returned. To be more specific, provide ``{subject_identifier=subject_identifier, visit_schedule_name=visit_schedule_name}``.
 To be even more specific,  ``{subject_identifier=subject_identifier, visit_schedule_name=visit_schedule_name, schedule_name=schedule_name}``.
@@ -80,8 +89,9 @@ The most common usage is to just provide these values with an appointment instan
 
     first_appointment = Appointment.objects.first_appointment(appointment=appointment)
 
-**next_appointment(), previous_appointment()**
 
+next_appointment() previous_appointment()
++++++++++++++++++++++++++++++++++++++++++
 
 The next and previous appointment are relative to the schedule and a visit_code within that schedule. If next is called on the last appointment in the sequence ``None`` is returned. If previous is called on the first appointment in the sequence ``None`` is returned.
 
@@ -95,6 +105,7 @@ For example, in a sequence of appointment 1000, 2000, 3000, 4000:
     >>> next_appointment.visit_code
     2000
 
+
 But you can also pass an appointment instance and pass the visit code:
 
 .. code-block:: python
@@ -105,6 +116,8 @@ But you can also pass an appointment instance and pass the visit code:
             appointment=appointment, visit_code=3000)
     >>> next_appointment.visit_code
     4000
+
+
 If you ask for the next appointment from the last, ``None`` is returned:
 
 .. code-block:: python
@@ -116,6 +129,7 @@ If you ask for the next appointment from the last, ``None`` is returned:
     >>> next_appointment.visit_code
     AttributeError: 'NoneType' object has no attribute 'visit_code'
 
+
 The ``previous_appointment`` acts as expected:
 
 .. code-block:: python
@@ -126,8 +140,9 @@ The ``previous_appointment`` acts as expected:
     >>> previous_appointment.visit_code
     AttributeError: 'NoneType' object has no attribute 'visit_code'
 
-**delete_for_subject_after_date()**
 
+delete_for_subject_after_date()
++++++++++++++++++++++++++++++++
 
 This method will delete all appointments for a subject after a given datetime. See also ``edc-offstudy``.
 
@@ -138,15 +153,14 @@ This method will delete all appointments for a subject after a given datetime. S
     appointment = models.OneToOneField(Appointment, on_delete=PROTECT)
 
 
-
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-appointment.svg
-    :target: https://pypi.python.org/pypi/edc-appointment
-    
+   :target: https://pypi.python.org/pypi/edc-appointment
+
 .. |travis| image:: https://travis-ci.org/clinicedc/edc-appointment.svg?branch=develop
-    :target: https://travis-ci.org/clinicedc/edc-appointment
-    
+   :target: https://travis-ci.org/clinicedc/edc-appointment
+
 .. |codecov| image:: https://codecov.io/gh/clinicedc/edc-appointment/branch/develop/graph/badge.svg
-  :target: https://codecov.io/gh/clinicedc/edc-appointment
+   :target: https://codecov.io/gh/clinicedc/edc-appointment
 
 .. |downloads| image:: https://pepy.tech/badge/edc-appointment
    :target: https://pepy.tech/project/edc-appointment
