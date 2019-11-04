@@ -11,11 +11,6 @@ with open(join(dirname(__file__), 'README.rst')) as readme:
 with open(join(dirname(__file__), 'VERSION')) as f:
     VERSION = f.read()
 
-tests_require = ['edc-test-utils']
-with open(join(dirname(abspath(__file__)), 'requirements.txt')) as f:
-    for line in f:
-        tests_require.append(line.strip())
-
 # allow setup.py to be run from any path
 os.chdir(normpath(join(abspath(__file__), os.pardir)))
 
@@ -59,6 +54,4 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     python_requires=">=3.7",
-    tests_require=tests_require,
-    test_suite='runtests.main',
 )
