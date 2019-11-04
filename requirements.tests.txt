@@ -1,3 +1,5 @@
 edc-locator
 edc-identifier
 edc-test-utils
+edc-randomization
+edc-utils
