@@ -4,7 +4,6 @@ from setuptools import setup
 from setuptools import find_packages
 from os.path import join, abspath, normpath, dirname
 
-
 with open(join(dirname(__file__), 'README.rst')) as readme:
     README = readme.read()
 
@@ -27,21 +26,7 @@ setup(
     long_description=README,
     zip_safe=False,
     keywords='django appointments research clinical trials',
-    install_requires=[
-        'edc-dashboard',
-        'edc-facility',
-        'edc_form_validators',
-        'edc-identifier',
-        'edc-metadata',
-        'edc-metadata-rules',
-        'edc-model',
-        'edc-model-admin',
-        'edc-sites',
-        'edc-timepoint',
-        'edc-utils',
-        'edc-visit-schedule',
-        'edc-offstudy',
-    ],
+    install_requires=[],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
@@ -54,4 +39,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     python_requires=">=3.7",
+    test_suite='runtests.main',
 )
