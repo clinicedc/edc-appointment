@@ -59,7 +59,7 @@ def main():
     failfast = True if [t for t in sys.argv if t == '--failfast'] else False
     failures = DiscoverRunner(failfast=failfast, tags=tags).run_tests(
         [f'{app_name}.tests'])
-    sys.exit(bool(failures))
+    sys.exit(failures)
 
 
 if __name__ == "__main__":
