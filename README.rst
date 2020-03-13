@@ -156,8 +156,8 @@ This method will delete all appointments for a subject after a given datetime. S
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-appointment.svg
    :target: https://pypi.python.org/pypi/edc-appointment
 
-.. |travis| image:: https://travis-ci.org/clinicedc/edc-appointment.svg?branch=develop
-   :target: https://travis-ci.org/clinicedc/edc-appointment
+.. |travis| image:: https://travis-ci.com/clinicedc/edc-appointment.svg?branch=develop
+   :target: https://travis-ci.com/clinicedc/edc-appointment
 
 .. |codecov| image:: https://codecov.io/gh/clinicedc/edc-appointment/branch/develop/graph/badge.svg
    :target: https://codecov.io/gh/clinicedc/edc-appointment
