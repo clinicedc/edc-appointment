@@ -11,7 +11,7 @@ from django.test.runner import DiscoverRunner
 from edc_test_utils import DefaultTestSettings
 from os.path import abspath, dirname
 
-app_name = 'edc_appointment'
+app_name = "edc_appointment"
 base_dir = dirname(abspath(__file__))
 
 DEFAULT_SETTINGS = DefaultTestSettings(
@@ -22,30 +22,31 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     EDC_PROTOCOL_STUDY_OPEN_DATETIME=arrow.utcnow() - relativedelta(years=2),
     EDC_PROTOCOL_STUDY_CLOSE_DATETIME=arrow.utcnow() + relativedelta(years=1),
     INSTALLED_APPS=[
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
-        'django.contrib.sites',
-        'django_crypto_fields.apps.AppConfig',
-        'django_revision.apps.AppConfig',
+        "django.contrib.admin",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "django.contrib.staticfiles",
+        "django.contrib.sites",
+        "django_crypto_fields.apps.AppConfig",
+        "django_revision.apps.AppConfig",
         "edc_offstudy.apps.AppConfig",
-        'edc_dashboard.apps.AppConfig',
-        'edc_device.apps.AppConfig',
-        'edc_facility.apps.AppConfig',
-        'edc_identifier.apps.AppConfig',
-        'edc_metadata.apps.AppConfig',
-        'edc_metadata_rules.apps.AppConfig',
-        'edc_protocol.apps.AppConfig',
-        'edc_randomization.apps.AppConfig',
-        'edc_registration.apps.AppConfig',
-        'edc_sites.apps.AppConfig',
-        'edc_timepoint.apps.AppConfig',
-        'edc_visit_schedule.apps.AppConfig',
-        'edc_visit_tracking.apps.AppConfig',
-        'edc_appointment.apps.AppConfig',
+        "edc_crf.apps.AppConfig",
+        "edc_dashboard.apps.AppConfig",
+        "edc_device.apps.AppConfig",
+        "edc_facility.apps.AppConfig",
+        "edc_identifier.apps.AppConfig",
+        "edc_metadata.apps.AppConfig",
+        "edc_metadata_rules.apps.AppConfig",
+        "edc_protocol.apps.AppConfig",
+        "edc_randomization.apps.AppConfig",
+        "edc_registration.apps.AppConfig",
+        "edc_sites.apps.AppConfig",
+        "edc_timepoint.apps.AppConfig",
+        "edc_visit_schedule.apps.AppConfig",
+        "edc_visit_tracking.apps.AppConfig",
+        "edc_appointment.apps.AppConfig",
     ],
     add_dashboard_middleware=True,
 ).settings
@@ -55,10 +56,11 @@ def main():
     if not settings.configured:
         settings.configure(**DEFAULT_SETTINGS)
     django.setup()
-    tags = [t.split('=')[1] for t in sys.argv if t.startswith('--tag')]
-    failfast = True if [t for t in sys.argv if t == '--failfast'] else False
+    tags = [t.split("=")[1] for t in sys.argv if t.startswith("--tag")]
+    failfast = True if [t for t in sys.argv if t == "--failfast"] else False
     failures = DiscoverRunner(failfast=failfast, tags=tags).run_tests(
-        [f'{app_name}.tests'])
+        [f"{app_name}.tests"]
+    )
     sys.exit(failures)
 
 
