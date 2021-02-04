@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-import arrow
-import django
 import logging
 import os
 import sys
+from os.path import abspath, dirname
 
+import arrow
+import django
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.test.runner import DiscoverRunner
 from edc_test_utils import DefaultTestSettings
-from os.path import abspath, dirname
 
 app_name = "edc_appointment"
 base_dir = dirname(abspath(__file__))
@@ -61,9 +61,7 @@ def main():
     django.setup()
     tags = [t.split("=")[1] for t in sys.argv if t.startswith("--tag")]
     failfast = True if [t for t in sys.argv if t == "--failfast"] else False
-    failures = DiscoverRunner(failfast=failfast, tags=tags).run_tests(
-        [f"{app_name}.tests"]
-    )
+    failures = DiscoverRunner(failfast=failfast, tags=tags).run_tests([f"{app_name}.tests"])
     sys.exit(failures)
 
 
