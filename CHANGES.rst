@@ -1,7 +1,7 @@
 Changes
 =======
 
-0.3.11
+0.3.10
 ------
 - fix issue that triggers a migration if APPT_REASON_CHOICES is customized in setttings
 - use default DEFAULT_APPT_REASON_CHOICES on model, use custom choices on modelform
