@@ -1,6 +1,13 @@
 Changes
 =======
 
+0.3.11
+------
+- fix issue that triggers a migration if APPT_REASON_CHOICES is customized in setttings
+- use default DEFAULT_APPT_REASON_CHOICES on model, use custom choices on modelform
+- validate custom choices for APPT_REASON_CHOICES if overriden thru settings
+  to ensure required keys are present
+
 0.3.5
 -----
 - add link in form validation error to requisition changelist
