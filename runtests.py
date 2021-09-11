@@ -21,6 +21,8 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     ETC_DIR=os.path.join(base_dir, app_name, "tests", "etc"),
     EDC_PROTOCOL_STUDY_OPEN_DATETIME=arrow.utcnow() - relativedelta(years=2),
     EDC_PROTOCOL_STUDY_CLOSE_DATETIME=arrow.utcnow() + relativedelta(years=1),
+    EDC_AUTH_SKIP_SITE_AUTHS=True,
+    EDC_AUTH_SKIP_AUTH_UPDATER=True,
     INSTALLED_APPS=[
         "django.contrib.admin",
         "django.contrib.auth",
@@ -31,7 +33,9 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "django.contrib.sites",
         "django_crypto_fields.apps.AppConfig",
         "django_revision.apps.AppConfig",
+        "import_export",
         "multisite",
+        "edc_auth.apps.AppConfig",
         "edc_action_item.apps.AppConfig",
         "edc_offstudy.apps.AppConfig",
         "edc_crf.apps.AppConfig",
