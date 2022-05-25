@@ -23,6 +23,12 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     EDC_PROTOCOL_STUDY_CLOSE_DATETIME=arrow.utcnow() + relativedelta(years=1),
     EDC_AUTH_SKIP_SITE_AUTHS=True,
     EDC_AUTH_SKIP_AUTH_UPDATER=True,
+    SUBJECT_SCREENING_MODEL="edc_appointment_app.subjectscreening",
+    SUBJECT_CONSENT_MODEL="edc_appointment_app.subjectconsent",
+    SUBJECT_VISIT_MODEL="edc_appointment_app.subjectvisit",
+    SUBJECT_VISIT_MISSED_MODEL="edc_appointment_app.subjectvisitmissed",
+    SUBJECT_REQUISITION_MODEL="edc_appointment_app.subjectrequisition",
+    SUBJECT_APP_LABEL="edc_appointment_app",
     INSTALLED_APPS=[
         "django.contrib.admin",
         "django.contrib.auth",
@@ -46,6 +52,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_metadata.apps.AppConfig",
         "edc_protocol.apps.AppConfig",
         "edc_randomization.apps.AppConfig",
+        "edc_reference.apps.AppConfig",
         "edc_registration.apps.AppConfig",
         "edc_notification.apps.AppConfig",
         "edc_sites.apps.AppConfig",
@@ -53,6 +60,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_visit_schedule.apps.AppConfig",
         "edc_visit_tracking.apps.AppConfig",
         "edc_appointment.apps.AppConfig",
+        "edc_appointment_app.apps.AppConfig",
     ],
     add_dashboard_middleware=True,
 ).settings
