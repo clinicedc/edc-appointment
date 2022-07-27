@@ -1,6 +1,10 @@
 Changes
 =======
 
+0.3.35
+------
+- check appointment model permissions before creating unscheduled appointment
+
 0.3.19
 ------
 - tighten up window period validation and handling
