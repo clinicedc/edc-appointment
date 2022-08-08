@@ -7,7 +7,7 @@ This module works closely with ``edc_visit_tracking`` and ``edc_visit_schedule``
 
 Subject data is collected on predefined timepoints. We describe these data collection timepoints in a ``visit_schedule`` as provided by ``edc-visit-schedule``. In ``edc-appointment`` timepoints are represented by appointments. ``edc-appointment`` provides classes for creating and managing appointments.
 
-See also ``edc-visit-schedule``. 
+See also ``edc-visit-schedule``.
 
 
 AppointmentModelMixin
@@ -18,7 +18,7 @@ A model mixin for the Appointment model. Each project may have one appointment m
 .. code-block:: python
 
     class Appointment(AppointmentModelMixin, RequiresConsentModelMixin, BaseUuidModel):
-    
+
         class Meta(AppointmentModelMixin.Meta):
             consent_model = 'edc_example.subjectconsent'
             app_label = 'edc_example'
@@ -33,11 +33,11 @@ The ``Appointment`` model is a required foreignkey for the visit report. Be sure
 
     class SubjectVisit(VisitModelMixin, OffstudyMixin, CreatesMetadataModelMixin,
                        RequiresConsentModelMixin, BaseUuidModel):
-    
+
         appointment = models.OneToOneField(Appointment, on_delete=PROTECT)
-    
+
         objects = VisitModelManager()
-    
+
         class Meta(VisitModelMixin.Meta):
             consent_model = 'edc_example.subjectconsent'
             app_label = 'edc_example'
@@ -54,15 +54,15 @@ Adds the model field ``facility``. The value of field ``facility`` tells the ``C
 
     class Enrollment(EnrollmentModelMixin, CreateAppointmentsMixin,
                      RequiresConsentModelMixin, BaseUuidModel):
-    
+
         class Meta(EnrollmentModelMixin.Meta):
             visit_schedule_name = 'subject_visit_schedule.schedule1'
             consent_model = 'edc_example.subjectconsent'
             app_label = 'edc_example'
 
-When ``Enrollment`` declared above is saved, one appointment will be created for the subject for each ``visit`` in schedule ``schedule1`` of visit_schedule ``subject_visit_schedule``. 
+When ``Enrollment`` declared above is saved, one appointment will be created for the subject for each ``visit`` in schedule ``schedule1`` of visit_schedule ``subject_visit_schedule``.
 
-Note: the value for ``facility`` must be provided by the user, either through the form interface or programmatically. 
+Note: the value for ``facility`` must be provided by the user, either through the form interface or programmatically.
 
 
 Customizing appointment scheduling by ``Facility``
@@ -74,7 +74,7 @@ see ``edc_facility``
 Available Appointment Model Manager Methods
 ===========================================
 
-The ``Appointment`` model is declared with ``AppointmentManager``. It has several useful methods. 
+The ``Appointment`` model is declared with ``AppointmentManager``. It has several useful methods.
 
 
 first_appointment() last_appointment()
@@ -146,7 +146,7 @@ delete_for_subject_after_date()
 
 This method will delete all appointments for a subject after a given datetime. See also ``edc-offstudy``.
 
-``Appointment`` is usually a foreignkey of a visit model. It's important when using this method to ensure that when declaring ``Appointment`` as a foreignkey you explicitly set ``on_delete=PROTECT``. If you don't, the deletion will cascade to other related instances -- and that's bad. 
+``Appointment`` is usually a foreignkey of a visit model. It's important when using this method to ensure that when declaring ``Appointment`` as a foreignkey you explicitly set ``on_delete=PROTECT``. If you don't, the deletion will cascade to other related instances -- and that's bad.
 
 .. code-block:: python
 
