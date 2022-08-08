@@ -1,6 +1,12 @@
 Changes
 =======
 
+0.3.36
+------
+- fix incorrectly formatted codename string passed to has_perm for unscheduled appts
+- add pre-commit config
+- expand testing matrix - add  py3.10 dj4.0, dj4.1
+
 0.3.35
 ------
 - check appointment model permissions before creating unscheduled appointment
