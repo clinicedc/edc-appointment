@@ -4,12 +4,12 @@ import os
 import sys
 from os.path import abspath, dirname
 
-import arrow
 import django
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.test.runner import DiscoverRunner
 from edc_test_utils import DefaultTestSettings
+from edc_utils import get_utcnow
 
 app_name = "edc_appointment"
 base_dir = dirname(abspath(__file__))
@@ -19,8 +19,8 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     BASE_DIR=base_dir,
     APP_NAME=app_name,
     ETC_DIR=os.path.join(base_dir, app_name, "tests", "etc"),
-    EDC_PROTOCOL_STUDY_OPEN_DATETIME=arrow.utcnow() - relativedelta(years=2),
-    EDC_PROTOCOL_STUDY_CLOSE_DATETIME=arrow.utcnow() + relativedelta(years=1),
+    EDC_PROTOCOL_STUDY_OPEN_DATETIME=get_utcnow() - relativedelta(years=2),
+    EDC_PROTOCOL_STUDY_CLOSE_DATETIME=get_utcnow() + relativedelta(years=1),
     EDC_AUTH_SKIP_SITE_AUTHS=True,
     EDC_AUTH_SKIP_AUTH_UPDATER=True,
     SUBJECT_SCREENING_MODEL="edc_appointment_app.subjectscreening",
