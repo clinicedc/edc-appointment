@@ -1,6 +1,12 @@
 Changes
 =======
 
+0.3.46
+------
+- move functionality of methods next/previous to utils
+- rename model method `visit` to `related_visit` to avoid conflict with edc-visit-schedule
+  model method `visit`
+
 0.3.36
 ------
 - fix incorrectly formatted codename string passed to has_perm for unscheduled appts

@@ -56,7 +56,7 @@ class SubjectRequisition(
     NonUniqueSubjectIdentifierFieldMixin, VisitCodeFieldsModelMixin, BaseUuidModel
 ):
     @classmethod
-    def visit_model_attr(cls):
+    def related_visit_model_attr(cls):
         return "subject_visit"
 
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=models.PROTECT, related_name="+")
