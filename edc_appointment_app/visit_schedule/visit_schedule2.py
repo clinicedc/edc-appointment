@@ -5,7 +5,7 @@ from .crfs import crfs, crfs_missed, requisitions
 
 visit_schedule2 = VisitSchedule(
     name="visit_schedule2",
-    offstudy_model="edc_appointment_app.subjectoffstudy2",
+    offstudy_model="edc_appointment_app.subjectoffstudy",
     death_report_model="edc_appointment_app.deathreport",
     locator_model="edc_appointment_app.subjectlocator",
 )
