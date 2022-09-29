@@ -4,11 +4,12 @@ from django.db import models
 from django.db.models.deletion import PROTECT
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_crf.model_mixins import CrfModelMixin
+from edc_identifier.managers import SubjectIdentifierManager
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_list_data.model_mixins import ListModelMixin
 from edc_metadata.model_mixins.creates import CreatesMetadataModelMixin
 from edc_model.models import BaseUuidModel
-from edc_offstudy.model_mixins import OffstudyModelManager, OffstudyModelMixin
+from edc_offstudy.model_mixins import OffstudyModelMixin
 from edc_reference.model_mixins import ReferenceModelMixin
 from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 from edc_sites.models import SiteModelMixin
@@ -33,10 +34,10 @@ class Panel(ListModelMixin):
 
 
 class SubjectVisit(
+    SiteModelMixin,
     VisitModelMixin,
     ReferenceModelMixin,
     CreatesMetadataModelMixin,
-    SiteModelMixin,
     RequiresConsentFieldsModelMixin,
     BaseUuidModel,
 ):
@@ -53,7 +54,10 @@ class SubjectVisit(
 
 
 class SubjectRequisition(
-    NonUniqueSubjectIdentifierFieldMixin, VisitCodeFieldsModelMixin, BaseUuidModel
+    SiteModelMixin,
+    NonUniqueSubjectIdentifierFieldMixin,
+    VisitCodeFieldsModelMixin,
+    BaseUuidModel,
 ):
     @classmethod
     def related_visit_model_attr(cls):
@@ -67,7 +71,7 @@ class SubjectRequisition(
         pass
 
 
-class SubjectVisitMissed(SubjectVisitMissedModelMixin, BaseUuidModel):
+class SubjectVisitMissed(SiteModelMixin, SubjectVisitMissedModelMixin, BaseUuidModel):
 
     subject_visit = models.OneToOneField(SubjectVisit, on_delete=PROTECT)
 
@@ -83,6 +87,7 @@ class SubjectVisitMissed(SubjectVisitMissedModelMixin, BaseUuidModel):
 
 
 class SubjectConsent(
+    SiteModelMixin,
     NonUniqueSubjectIdentifierFieldMixin,
     UpdatesOrCreatesRegistrationModelMixin,
     BaseUuidModel,
@@ -100,27 +105,27 @@ class SubjectConsent(
     dob = models.DateField(default=date(1995, 1, 1))
 
 
-class SubjectOffstudy(OffstudyModelMixin, BaseUuidModel):
-    objects = OffstudyModelManager()
+class SubjectOffstudy(SiteModelMixin, OffstudyModelMixin, BaseUuidModel):
+    objects = SubjectIdentifierManager()
 
 
-class SubjectOffstudy2(OffstudyModelMixin, BaseUuidModel):
-    objects = OffstudyModelManager()
+class SubjectOffstudy2(SiteModelMixin, OffstudyModelMixin, BaseUuidModel):
+    objects = SubjectIdentifierManager()
 
 
-class SubjectOffstudyFive(OffstudyModelMixin, BaseUuidModel):
-    objects = OffstudyModelManager()
+class SubjectOffstudyFive(SiteModelMixin, OffstudyModelMixin, BaseUuidModel):
+    objects = SubjectIdentifierManager()
 
 
-class SubjectOffstudySix(OffstudyModelMixin, BaseUuidModel):
-    objects = OffstudyModelManager()
+class SubjectOffstudySix(SiteModelMixin, OffstudyModelMixin, BaseUuidModel):
+    objects = SubjectIdentifierManager()
 
 
-class SubjectOffstudySeven(OffstudyModelMixin, BaseUuidModel):
-    objects = OffstudyModelManager()
+class SubjectOffstudySeven(SiteModelMixin, OffstudyModelMixin, BaseUuidModel):
+    objects = SubjectIdentifierManager()
 
 
-class DeathReport(BaseUuidModel):
+class DeathReport(SiteModelMixin, BaseUuidModel):
     subject_identifier = models.CharField(max_length=25, null=True)
 
     report_datetime = models.DateTimeField()
@@ -129,36 +134,36 @@ class DeathReport(BaseUuidModel):
 # visit_schedule
 
 
-class OnSchedule(OnScheduleModelMixin, BaseUuidModel):
+class OnSchedule(SiteModelMixin, OnScheduleModelMixin, BaseUuidModel):
     pass
 
 
-class OffSchedule(OffScheduleModelMixin, BaseUuidModel):
+class OffSchedule(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
     pass
 
 
-class OnScheduleOne(OnScheduleModelMixin, BaseUuidModel):
+class OnScheduleOne(SiteModelMixin, OnScheduleModelMixin, BaseUuidModel):
     pass
 
 
-class OffScheduleOne(OffScheduleModelMixin, BaseUuidModel):
+class OffScheduleOne(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
     class Meta(OffScheduleModelMixin.Meta):
         pass
 
 
-class OnScheduleTwo(OnScheduleModelMixin, BaseUuidModel):
+class OnScheduleTwo(SiteModelMixin, OnScheduleModelMixin, BaseUuidModel):
     pass
 
 
-class OffScheduleTwo(OffScheduleModelMixin, BaseUuidModel):
+class OffScheduleTwo(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
     pass
 
 
-class OnScheduleThree(OnScheduleModelMixin, BaseUuidModel):
+class OnScheduleThree(SiteModelMixin, OnScheduleModelMixin, BaseUuidModel):
     pass
 
 
-class OffScheduleThree(OffScheduleModelMixin, BaseUuidModel):
+class OffScheduleThree(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
     pass
 
 
