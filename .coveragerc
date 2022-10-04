@@ -2,3 +2,8 @@
 include = edc_appointment/*
 omit = edc_appointment/tests/*,edc_appointment/migrations/*
 branch = 1
+
+[report]
+exclude_lines =
+  pragma: no cover
+  if TYPE_CHECKING:
