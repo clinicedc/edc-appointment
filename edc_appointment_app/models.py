@@ -12,6 +12,7 @@ from edc_model.models import BaseUuidModel
 from edc_offstudy.model_mixins import OffstudyModelMixin
 from edc_reference.model_mixins import ReferenceModelMixin
 from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
+from edc_screening.model_mixins import ScreeningModelMixin
 from edc_sites.models import SiteModelMixin
 from edc_utils import get_utcnow
 from edc_visit_schedule.model_mixins import (
@@ -103,6 +104,10 @@ class SubjectConsent(
     confirm_identity = models.CharField(max_length=25)
 
     dob = models.DateField(default=date(1995, 1, 1))
+
+
+class SubjectScreening(ScreeningModelMixin, BaseUuidModel):
+    objects = SubjectIdentifierManager()
 
 
 class SubjectOffstudy(SiteModelMixin, OffstudyModelMixin, BaseUuidModel):
