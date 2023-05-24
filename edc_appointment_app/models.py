@@ -73,7 +73,6 @@ class SubjectRequisition(
 
 
 class SubjectVisitMissed(SiteModelMixin, SubjectVisitMissedModelMixin, BaseUuidModel):
-
     subject_visit = models.OneToOneField(SubjectVisit, on_delete=PROTECT)
 
     report_datetime = models.DateTimeField(default=get_utcnow)
@@ -173,7 +172,6 @@ class OffScheduleThree(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
 
 
 class CrfOne(CrfModelMixin, BaseUuidModel):
-
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
     report_datetime = models.DateTimeField(default=get_utcnow)
@@ -186,7 +184,6 @@ class CrfOne(CrfModelMixin, BaseUuidModel):
 
 
 class CrfTwo(CrfModelMixin, BaseUuidModel):
-
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
     report_datetime = models.DateTimeField(default=get_utcnow)
@@ -199,7 +196,6 @@ class CrfTwo(CrfModelMixin, BaseUuidModel):
 
 
 class CrfThree(CrfModelMixin, BaseUuidModel):
-
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
     report_datetime = models.DateTimeField(default=get_utcnow)
@@ -212,7 +208,6 @@ class CrfThree(CrfModelMixin, BaseUuidModel):
 
 
 class CrfFour(CrfModelMixin, BaseUuidModel):
-
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
     report_datetime = models.DateTimeField(default=get_utcnow)
@@ -225,7 +220,6 @@ class CrfFour(CrfModelMixin, BaseUuidModel):
 
 
 class CrfFive(CrfModelMixin, BaseUuidModel):
-
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
     report_datetime = models.DateTimeField(default=get_utcnow)
