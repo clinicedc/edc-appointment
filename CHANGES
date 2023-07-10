@@ -1,6 +1,13 @@
 Changes
 =======
 
+0.3.74
+------
+- extend lower bound of next visit window if gap days exist and allowed
+- use SiteModelAdminMixin
+- use `update_fields` where possible
+- validate `site` when creating appointnents
+
 0.3.46
 ------
 - move functionality of methods next/previous to utils
