@@ -7,7 +7,6 @@ visit_schedule1 = VisitSchedule(
     name="visit_schedule1",
     offstudy_model="edc_appointment_app.subjectoffstudy",
     death_report_model="edc_appointment_app.deathreport",
-    locator_model="edc_appointment_app.subjectlocator",
 )
 
 schedule1 = Schedule(
