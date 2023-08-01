@@ -26,7 +26,7 @@ from edc_visit_tracking.model_mixins import (
 )
 from edc_visit_tracking.models import SubjectVisitMissedReasons
 
-from edc_appointment.models import Appointment
+from edc_appointment.utils import get_appointment_model_name
 
 
 class Panel(ListModelMixin):
@@ -34,6 +34,7 @@ class Panel(ListModelMixin):
         pass
 
 
+#
 class SubjectVisit(
     SiteModelMixin,
     VisitModelMixin,
@@ -42,16 +43,20 @@ class SubjectVisit(
     RequiresConsentFieldsModelMixin,
     BaseUuidModel,
 ):
-    appointment = models.OneToOneField(
-        Appointment,
-        on_delete=PROTECT,  # related_name="test_visit_schedule_appointment"
-    )
+    appointment = models.OneToOneField(get_appointment_model_name(), on_delete=PROTECT)
 
     subject_identifier = models.CharField(max_length=25, null=True)
 
     report_datetime = models.DateTimeField()
 
     reason = models.CharField(max_length=25, null=True)
+
+
+# leave this model so ensure tests pass even though a proxy related
+# visit exists (but is not used)
+class SubjectVisit2(SubjectVisit):
+    class Meta:
+        proxy = True
 
 
 class SubjectRequisition(
