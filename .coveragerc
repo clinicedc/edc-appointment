@@ -1,6 +1,6 @@
 [run]
 include = edc_appointment/*
-omit = edc_appointment/tests/*,edc_appointment/migrations/*
+omit = edc_appointment/tests/*,edc_appointment/migrations/*,_version.py,runtests.py,stubs.py,offline_models.py,edc_appointment_app/*
 branch = 1
 
 [report]
