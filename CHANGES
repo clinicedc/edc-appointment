@@ -1,6 +1,20 @@
 Changes
 =======
 
+0.3.77
+------
+- get default appt_type from func get_appt_type_default()
+- add settings attribute EDC_APPOINTMENT_FORM_META_OPTIONS which can
+  override the default labels/help_text on the appontment
+  form
+- declare appt_type list_data explicitly
+- move appt_type field and method to model mixins
+
+
+
+0.3.76
+------
+
 0.3.74
 ------
 - extend lower bound of next visit window if gap days exist and allowed
