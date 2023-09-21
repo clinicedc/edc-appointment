@@ -152,6 +152,20 @@ This method will delete all appointments for a subject after a given datetime. S
 
     appointment = models.OneToOneField(Appointment, on_delete=PROTECT)
 
+Allowing appointments to be skipped using SKIPPED_APPT
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Set ``settings.EDC_APPOINTMENT_ALLOW_SKIPPED_APPT_USING`` to a list of tuples .. [(lower_label, field_name), ...]. The default is ``[]``::
+
+    EDC_APPOINTMENT_ALLOW_SKIPPED_APPT_USING = [("mext_appointment_app.nextappointment", "appt_date")]
+
+When set, options to skip the appointment will be available on the Appointment form.
+
+Note:
+    This option does not make sense for longitudinal trials following a protocol defined schedule. However
+    if part of the follow up is driven by routine care, for example, where patients do not follow a strict
+    schedule, then it may be useful.
+
 
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-appointment.svg
    :target: https://pypi.python.org/pypi/edc-appointment
