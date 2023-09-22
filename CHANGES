@@ -1,6 +1,17 @@
 Changes
 =======
 
+0.3.81
+------
+- add SKIPPED_APPT appointment status to help handle routine
+  care where the next appointment may skip over the estimated
+  schedule.
+- use settings attr to enable the use of appt_status=SKIPPED_APPT,
+  EDC_APPOINTMENT_ALLOW_SKIPPED_APPT_USING
+- add signal to detect model that provides an appt date. Skip
+  over interim XXXX.0 appointments and update the target appointment
+  to the given date.
+
 0.3.77
 ------
 - get default appt_type from func get_appt_type_default()
@@ -9,8 +20,6 @@ Changes
   form
 - declare appt_type list_data explicitly
 - move appt_type field and method to model mixins
-
-
 
 0.3.76
 ------

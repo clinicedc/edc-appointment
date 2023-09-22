@@ -86,6 +86,14 @@ class SubjectVisitMissed(SiteModelMixin, SubjectVisitMissedModelMixin, BaseUuidM
         SubjectVisitMissedReasons, blank=True, related_name="missed_reasons"
     )
 
+    @classmethod
+    def related_visit_model_attr(cls):
+        return "subject_visit"
+
+    @property
+    def related_visit(self):
+        return self.subject_visit
+
     class Meta(BaseUuidModel.Meta):
         verbose_name = "Missed Visit Report"
         verbose_name_plural = "Missed Visit Report"
