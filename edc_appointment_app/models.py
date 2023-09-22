@@ -195,6 +195,10 @@ class CrfOne(CrfModelMixin, BaseUuidModel):
 
     f3 = models.CharField(max_length=50, null=True, blank=True)
 
+    next_appt_date = models.DateField(null=True, blank=True)
+
+    next_visit_code = models.CharField(max_length=50, null=True, blank=True)
+
 
 class CrfTwo(CrfModelMixin, BaseUuidModel):
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
@@ -218,6 +222,8 @@ class CrfThree(CrfModelMixin, BaseUuidModel):
     f2 = models.CharField(max_length=50, null=True, blank=True)
 
     f3 = models.CharField(max_length=50, null=True, blank=True)
+
+    appt_date = models.DateField(null=True, blank=True)
 
 
 class CrfFour(CrfModelMixin, BaseUuidModel):
