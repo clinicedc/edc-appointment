@@ -20,6 +20,7 @@ from edc_visit_schedule.model_mixins import (
     OnScheduleModelMixin,
     VisitCodeFieldsModelMixin,
 )
+from edc_visit_schedule.models import VisitSchedule
 from edc_visit_tracking.model_mixins import (
     SubjectVisitMissedModelMixin,
     VisitModelMixin,
@@ -210,6 +211,10 @@ class CrfTwo(CrfModelMixin, BaseUuidModel):
     f2 = models.CharField(max_length=50, null=True, blank=True)
 
     f3 = models.CharField(max_length=50, null=True, blank=True)
+
+    visitschedule = models.ForeignKey(
+        VisitSchedule, on_delete=PROTECT, max_length=15, null=True, blank=False
+    )
 
 
 class CrfThree(CrfModelMixin, BaseUuidModel):
