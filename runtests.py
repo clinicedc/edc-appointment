@@ -2,14 +2,16 @@
 import logging
 import os
 import sys
+from datetime import datetime
 from os.path import abspath, dirname
+from zoneinfo import ZoneInfo
 
 import django
-from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.test.runner import DiscoverRunner
 from edc_test_utils import DefaultTestSettings
-from edc_utils import get_utcnow
+
+utc = ZoneInfo("UTC")
 
 app_name = "edc_appointment"
 base_dir = dirname(abspath(__file__))
@@ -20,8 +22,8 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     APP_NAME=app_name,
     ETC_DIR=os.path.join(base_dir, app_name, "tests", "etc"),
     EDC_NAVBAR_AUTODISCOVER=False,
-    EDC_PROTOCOL_STUDY_OPEN_DATETIME=get_utcnow() - relativedelta(years=2),
-    EDC_PROTOCOL_STUDY_CLOSE_DATETIME=get_utcnow() + relativedelta(years=1),
+    EDC_PROTOCOL_STUDY_OPEN_DATETIME=datetime(2016, 10, 2, 0, 0, 0, tzinfo=utc),
+    EDC_PROTOCOL_STUDY_CLOSE_DATETIME=datetime(2023, 10, 2, 0, 0, 0, tzinfo=utc),
     EDC_AUTH_SKIP_SITE_AUTHS=True,
     EDC_AUTH_SKIP_AUTH_UPDATER=True,
     SUBJECT_SCREENING_MODEL="edc_appointment_app.subjectscreening",
@@ -44,6 +46,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_auth.apps.AppConfig",
         "edc_action_item.apps.AppConfig",
         "edc_offstudy.apps.AppConfig",
+        "edc_consent.apps.AppConfig",
         "edc_crf.apps.AppConfig",
         "edc_dashboard.apps.AppConfig",
         "edc_data_manager.apps.AppConfig",

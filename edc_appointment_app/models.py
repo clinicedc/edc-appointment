@@ -228,6 +228,8 @@ class CrfThree(CrfModelMixin, BaseUuidModel):
 
     f3 = models.CharField(max_length=50, null=True, blank=True)
 
+    allow_create_interim = models.BooleanField(default=False)
+
     appt_date = models.DateField(null=True, blank=True)
 
 
