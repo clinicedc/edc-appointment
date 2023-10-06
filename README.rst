@@ -157,7 +157,7 @@ Allowing appointments to be skipped using SKIPPED_APPT
 
 Set ``settings.EDC_APPOINTMENT_ALLOW_SKIPPED_APPT_USING`` to a list of tuples .. [(lower_label, field_name), ...]. The default is ``[]``::
 
-    EDC_APPOINTMENT_ALLOW_SKIPPED_APPT_USING = [("mext_appointment_app.nextappointment", "appt_date")]
+    EDC_APPOINTMENT_ALLOW_SKIPPED_APPT_USING = [("edc_appointment_app.nextappointment", "appt_date")]
 
 When set, options to skip the appointment will be available on the Appointment form.
 
@@ -165,6 +165,42 @@ Note:
     This option does not make sense for longitudinal trials following a protocol defined schedule. However
     if part of the follow up is driven by routine care, for example, where patients do not follow a strict
     schedule, then it may be useful.
+
+Using a CRF to record the next appointment date
++++++++++++++++++++++++++++++++++++++++++++++++
+
+For routine care, the next appointment date is not set by the protocol. The EDC will create appointments
+according to the visit schedule as usual, but the dates will be approximate. You can administer a CRF at the
+end of each visit to capture the next appointment date. A signal will update the appointment
+that best matches the date given. Use this together with SKIPPED_APPT (see above).
+
+Set ``settings.EDC_APPOINTMENT_MAX_MONTHS_TO_NEXT_APPT`` to a limit the number of months ahead for next appointment date::
+
+    EDC_APPOINTMENT_MAX_MONTHS_TO_NEXT_APPT = 6 # default
+
+.. code-block:: python
+
+    # model.py
+    class NextAppointmentCrf(NextAppointmentCrfModelMixin, CrfModelMixin, BaseUuidModel):
+
+        class Meta(CrfModelMixin.Meta, BaseUuidModel.Meta):
+            verbose_name = "Next Appointment"
+            verbose_name_plural = "Next Appointments"
+
+
+    # forms.py
+    class NextAppointmentCrfForm(NextAppointmentCrfModelFormMixin, CrfModelFormMixin, forms.ModelForm):
+        form_validator_cls = NextAppointmentCrfFormValidator
+
+        class Meta:
+            model = NextAppointmentCrf
+            fields = "__all__"
+
+
+    # admin.py
+    @admin.register(NextAppointmentCrf, site=intecomm_subject_admin)
+    class NextAppointmentCrfAdmin(NextAppointmenCrftModelAdminMixin, CrfModelAdmin):
+        form = NextAppointmentCrfForm
 
 
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-appointment.svg
