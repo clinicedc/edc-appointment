@@ -1,20 +1,21 @@
 from django import forms
 from edc_crf.crf_form_validator import CrfFormValidator
 from edc_crf.modelform_mixins import CrfModelFormMixin
-from edc_next_appointment.form_validators import NextAppointmentFormValidatorMixin
-from edc_next_appointment.modelform_mixins import NextAppointmentModelFormMixin
 
-from .models import CrfThree
+from edc_appointment.form_validator_mixins import NextAppointmentCrfFormValidatorMixin
+from edc_appointment.modelform_mixins import NextAppointmentCrfModelFormMixin
+
+from .models import CrfThree, NextAppointmentCrf
 
 
-class NextAppointmentFormValidator(NextAppointmentFormValidatorMixin, CrfFormValidator):
+class NextAppointmentCrfFormValidator(NextAppointmentCrfFormValidatorMixin, CrfFormValidator):
     def clean(self):
         self.validate_date_is_on_clinic_day()
         super().clean()
 
 
-class CrfThreeForm(NextAppointmentModelFormMixin, CrfModelFormMixin, forms.ModelForm):
-    form_validator_cls = NextAppointmentFormValidator
+class CrfThreeForm(NextAppointmentCrfModelFormMixin, CrfModelFormMixin, forms.ModelForm):
+    form_validator_cls = NextAppointmentCrfFormValidator
 
     appt_date_fld = "appt_date"
     visit_code_fld = "f1"
@@ -26,3 +27,16 @@ class CrfThreeForm(NextAppointmentModelFormMixin, CrfModelFormMixin, forms.Model
         model = CrfThree
         fields = "__all__"
         labels = {"appt_date": "Next scheduled appointment date"}
+
+
+class NextAppointmentCrfForm(
+    NextAppointmentCrfModelFormMixin, CrfModelFormMixin, forms.ModelForm
+):
+    form_validator_cls = NextAppointmentCrfFormValidator
+
+    def validate_against_consent(self) -> None:
+        pass
+
+    class Meta:
+        model = NextAppointmentCrf
+        fields = "__all__"

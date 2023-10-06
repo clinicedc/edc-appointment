@@ -27,6 +27,9 @@ from edc_visit_tracking.model_mixins import (
 )
 from edc_visit_tracking.models import SubjectVisitMissedReasons
 
+from edc_appointment.model_mixins.next_appointment_crf_model_mixin import (
+    NextAppointmentCrfModelMixin,
+)
 from edc_appointment.utils import get_appointment_model_name
 
 
@@ -185,6 +188,14 @@ class OffScheduleThree(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
     pass
 
 
+class OnScheduleSix(SiteModelMixin, OnScheduleModelMixin, BaseUuidModel):
+    pass
+
+
+class OffScheduleSix(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
+    pass
+
+
 class CrfOne(CrfModelMixin, BaseUuidModel):
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
@@ -255,3 +266,7 @@ class CrfFive(CrfModelMixin, BaseUuidModel):
     f2 = models.CharField(max_length=50, null=True, blank=True)
 
     f3 = models.CharField(max_length=50, null=True, blank=True)
+
+
+class NextAppointmentCrf(NextAppointmentCrfModelMixin, CrfModelMixin, BaseUuidModel):
+    subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
