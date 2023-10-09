@@ -1,5 +1,7 @@
 from dateutil.relativedelta import relativedelta
-from edc_visit_schedule import Schedule, Visit, VisitSchedule
+from edc_visit_schedule.schedule import Schedule
+from edc_visit_schedule.visit import Visit
+from edc_visit_schedule.visit_schedule import VisitSchedule
 
 from edc_appointment_app.visit_schedule.crfs import crfs, crfs_missed
 

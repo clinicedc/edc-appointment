@@ -1,6 +1,5 @@
-from edc_visit_schedule import Requisition
 from edc_visit_schedule.tests.dummy_panel import DummyPanel
-from edc_visit_schedule.visit import Crf, FormsCollection
+from edc_visit_schedule.visit import Crf, FormsCollection, Requisition
 
 
 class MockPanel(DummyPanel):
