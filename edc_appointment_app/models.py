@@ -75,7 +75,7 @@ class SubjectRequisition(
 
     panel = models.ForeignKey(Panel, on_delete=PROTECT)
 
-    class Meta(BaseUuidModel.Meta):
+    class Meta(BaseUuidModel.Meta, NonUniqueSubjectIdentifierFieldMixin.Meta):
         pass
 
 
