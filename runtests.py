@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 import logging
-import os
 from datetime import datetime
-from os.path import abspath, dirname
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from edc_test_utils import DefaultTestSettings, func_main
@@ -10,13 +9,13 @@ from edc_test_utils import DefaultTestSettings, func_main
 utc = ZoneInfo("UTC")
 
 app_name = "edc_appointment"
-base_dir = dirname(abspath(__file__))
+base_dir = Path(__file__).absolute().parent
 
 project_settings = DefaultTestSettings(
     calling_file=__file__,
     BASE_DIR=base_dir,
     APP_NAME=app_name,
-    ETC_DIR=os.path.join(base_dir, app_name, "tests", "etc"),
+    ETC_DIR=str(base_dir / app_name / "tests" / "etc"),
     EDC_NAVBAR_AUTODISCOVER=False,
     EDC_PROTOCOL_STUDY_OPEN_DATETIME=datetime(2016, 10, 2, 0, 0, 0, tzinfo=utc),
     EDC_PROTOCOL_STUDY_CLOSE_DATETIME=datetime(2023, 10, 2, 0, 0, 0, tzinfo=utc),
