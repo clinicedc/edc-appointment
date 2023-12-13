@@ -1,26 +1,21 @@
 #!/usr/bin/env python
 import logging
-import os
-import sys
 from datetime import datetime
-from os.path import abspath, dirname
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
-import django
-from django.conf import settings
-from django.test.runner import DiscoverRunner
-from edc_test_utils import DefaultTestSettings
+from edc_test_utils import DefaultTestSettings, func_main
 
 utc = ZoneInfo("UTC")
 
 app_name = "edc_appointment"
-base_dir = dirname(abspath(__file__))
+base_dir = Path(__file__).absolute().parent
 
-DEFAULT_SETTINGS = DefaultTestSettings(
+project_settings = DefaultTestSettings(
     calling_file=__file__,
     BASE_DIR=base_dir,
     APP_NAME=app_name,
-    ETC_DIR=os.path.join(base_dir, app_name, "tests", "etc"),
+    ETC_DIR=str(base_dir / app_name / "tests" / "etc"),
     EDC_NAVBAR_AUTODISCOVER=False,
     EDC_PROTOCOL_STUDY_OPEN_DATETIME=datetime(2016, 10, 2, 0, 0, 0, tzinfo=utc),
     EDC_PROTOCOL_STUDY_CLOSE_DATETIME=datetime(2023, 10, 2, 0, 0, 0, tzinfo=utc),
@@ -80,13 +75,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
 
 
 def main():
-    if not settings.configured:
-        settings.configure(**DEFAULT_SETTINGS)
-    django.setup()
-    tags = [t.split("=")[1] for t in sys.argv if t.startswith("--tag")]
-    failfast = True if [t for t in sys.argv if t == "--failfast"] else False
-    failures = DiscoverRunner(failfast=failfast, tags=tags).run_tests([f"{app_name}.tests"])
-    sys.exit(failures)
+    func_main(project_settings, f"{app_name}.tests")
 
 
 if __name__ == "__main__":

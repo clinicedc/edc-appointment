@@ -206,8 +206,8 @@ Set ``settings.EDC_APPOINTMENT_MAX_MONTHS_TO_NEXT_APPT`` to a limit the number o
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-appointment.svg
    :target: https://pypi.python.org/pypi/edc-appointment
 
-.. |actions| image:: https://github.com/clinicedc/edc-appointment/workflows/build/badge.svg?branch=develop
-  :target: https://github.com/clinicedc/edc-appointment/actions?query=workflow:build
+.. |actions| image:: https://github.com/clinicedc/edc-appointment/actions/workflows/build.yml/badge.svg
+  :target: https://github.com/clinicedc/edc-appointment/actions/workflows/build.yml
 
 .. |codecov| image:: https://codecov.io/gh/clinicedc/edc-appointment/branch/develop/graph/badge.svg
    :target: https://codecov.io/gh/clinicedc/edc-appointment

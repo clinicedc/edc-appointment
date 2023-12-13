@@ -1,3 +1,4 @@
+from edc_consent import site_consents
 from edc_consent.consent import Consent
 from edc_constants.constants import FEMALE, MALE
 from edc_protocol import Protocol
@@ -12,3 +13,4 @@ v1_consent = Consent(
     age_max=64,
     gender=[MALE, FEMALE],
 )
+site_consents.register(v1_consent)
