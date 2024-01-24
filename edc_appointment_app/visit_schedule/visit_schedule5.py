@@ -3,7 +3,7 @@ from edc_visit_schedule.schedule import Schedule
 from edc_visit_schedule.visit import Visit
 from edc_visit_schedule.visit_schedule import VisitSchedule
 
-from edc_appointment_app.consents import v1_consent
+from edc_appointment_app.consents import consent_v1
 from edc_appointment_app.visit_schedule.crfs import crfs, crfs_missed
 
 
@@ -19,7 +19,7 @@ def get_visit_schedule5() -> VisitSchedule:
         onschedule_model="edc_appointment_app.onschedulethree",
         offschedule_model="edc_appointment_app.offschedulethree",
         appointment_model="edc_appointment.appointment",
-        consent_definitions=[v1_consent],
+        consent_definitions=[consent_v1],
     )
 
     visits = [

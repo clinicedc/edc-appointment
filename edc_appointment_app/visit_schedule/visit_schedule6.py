@@ -4,7 +4,7 @@ from edc_visit_schedule.schedule import Schedule
 from edc_visit_schedule.visit import Crf, CrfCollection, Visit
 from edc_visit_schedule.visit_schedule import VisitSchedule
 
-from edc_appointment_app.consents import v1_consent
+from edc_appointment_app.consents import consent_v1
 
 
 def get_visit_schedule6() -> VisitSchedule:
@@ -73,7 +73,7 @@ def get_visit_schedule6() -> VisitSchedule:
         name="schedule6",
         onschedule_model=f"{app_label}.onschedulesix",
         offschedule_model=f"{app_label}.offschedulesix",
-        consent_definitions=[v1_consent],
+        consent_definitions=[consent_v1],
         appointment_model="edc_appointment.appointment",
     )
 
