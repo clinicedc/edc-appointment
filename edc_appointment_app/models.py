@@ -31,6 +31,8 @@ from edc_appointment.model_mixins.next_appointment_crf_model_mixin import (
 )
 from edc_appointment.utils import get_appointment_model_name
 
+from .consents import consent_v1
+
 
 class Panel(ListModelMixin):
     class Meta:
@@ -121,6 +123,7 @@ class SubjectConsent(
 
 
 class SubjectScreening(ScreeningModelMixin, BaseUuidModel):
+    consent_definition = consent_v1
     objects = SubjectIdentifierManager()
 
 
