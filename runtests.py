@@ -5,14 +5,17 @@ import sys
 
 import django
 
+app_name = "edc_appointment"
+
 if __name__ == "__main__":
-    os.environ["DJANGO_SETTINGS_MODULE"] = "edc_appointment.tests.test_settings"
+    os.environ["DJANGO_SETTINGS_MODULE"] = f"{app_name}.tests.test_settings"
     django.setup()
     from django.test.runner import DiscoverRunner
 
     tags = [t.split("=")[1] for t in sys.argv if t.startswith("--tag")]
     failfast = any([True for t in sys.argv if t.startswith("--failfast")])
     keepdb = any([True for t in sys.argv if t.startswith("--keepdb")])
-    opts = dict(failfast=failfast, tags=tags, keepdb=keepdb)
-    failures = DiscoverRunner(**opts).run_tests(["edc_appointment.tests"], **opts)
+    skip_checks = any([True for t in sys.argv if t.startswith("--skip_checks")])
+    opts = dict(failfast=failfast, tags=tags, keepdb=keepdb, skip_checks=skip_checks)
+    failures = DiscoverRunner(**opts).run_tests([f"{app_name}.tests"], **opts)
     sys.exit(failures)
