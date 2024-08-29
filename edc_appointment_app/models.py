@@ -78,6 +78,10 @@ class SubjectRequisition(
 
     panel = models.ForeignKey(Panel, on_delete=PROTECT)
 
+    report_datetime = models.DateTimeField(default=get_utcnow)
+
+    is_drawn = models.CharField(max_length=15, default="YES")
+
     class Meta(BaseUuidModel.Meta, NonUniqueSubjectIdentifierFieldMixin.Meta):
         pass
 
