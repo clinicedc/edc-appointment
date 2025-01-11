@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from dateutil.relativedelta import relativedelta
 from edc_visit_schedule.constants import MONTH0, MONTH1, MONTH2, MONTH3, MONTH4
 from edc_visit_schedule.schedule import Schedule
@@ -6,9 +10,14 @@ from edc_visit_schedule.visit_schedule import VisitSchedule
 
 from edc_appointment_app.consents import consent_v1
 
+if TYPE_CHECKING:
+    from edc_consent.consent_definition import ConsentDefinition
 
-def get_visit_schedule6() -> VisitSchedule:
+
+def get_visit_schedule6(cdef: ConsentDefinition | None = None) -> VisitSchedule:
     app_label = "edc_appointment_app"
+
+    cdef = cdef or consent_v1
 
     crfs = CrfCollection(
         Crf(show_order=1, model=f"{app_label}.nextappointmentcrf", required=True),
@@ -73,7 +82,7 @@ def get_visit_schedule6() -> VisitSchedule:
         name="schedule6",
         onschedule_model=f"{app_label}.onschedulesix",
         offschedule_model=f"{app_label}.offschedulesix",
-        consent_definitions=[consent_v1],
+        consent_definitions=[cdef],
         appointment_model="edc_appointment.appointment",
     )
 
