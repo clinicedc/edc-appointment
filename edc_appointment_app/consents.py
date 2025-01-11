@@ -13,4 +13,5 @@ consent_v1 = ConsentDefinition(
     age_max=64,
     gender=[MALE, FEMALE],
 )
+
 site_consents.register(consent_v1)

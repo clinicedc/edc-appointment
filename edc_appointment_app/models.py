@@ -1,18 +1,23 @@
 from datetime import date
 
 from django.db import models
+from django.db.models import Manager
 from django.db.models.deletion import PROTECT
 from edc_consent.managers import ConsentObjectsByCdefManager, CurrentSiteByCdefManager
-from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
+from edc_consent.model_mixins import (
+    ConsentExtensionModelMixin,
+    RequiresConsentFieldsModelMixin,
+)
 from edc_crf.model_mixins import CrfModelMixin
 from edc_identifier.managers import SubjectIdentifierManager
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_list_data.model_mixins import ListModelMixin
 from edc_metadata.model_mixins.creates import CreatesMetadataModelMixin
-from edc_model.models import BaseUuidModel
+from edc_model.models import BaseUuidModel, HistoricalRecords
 from edc_offstudy.model_mixins import OffstudyModelMixin
 from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 from edc_screening.model_mixins import ScreeningModelMixin
+from edc_sites.managers import CurrentSiteManager
 from edc_sites.model_mixins import SiteModelMixin
 from edc_utils import get_utcnow
 from edc_visit_schedule.model_mixins import (
@@ -134,6 +139,19 @@ class SubjectConsentV1(SubjectConsent):
 
     class Meta:
         proxy = True
+
+
+class SubjectConsentV1Ext(ConsentExtensionModelMixin, SiteModelMixin, BaseUuidModel):
+
+    subject_consent = models.ForeignKey(SubjectConsentV1, on_delete=models.PROTECT)
+
+    on_site = CurrentSiteManager()
+    history = HistoricalRecords()
+    objects = Manager()
+
+    class Meta(ConsentExtensionModelMixin.Meta, BaseUuidModel.Meta):
+        verbose_name = "Subject Consent Extension V1.1"
+        verbose_name_plural = "Subject Consent Extension V1.1"
 
 
 class SubjectScreening(ScreeningModelMixin, BaseUuidModel):
