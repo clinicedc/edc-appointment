@@ -58,16 +58,17 @@ class AppointmentAppTestCaseMixin:
             appointment.appt_status = INCOMPLETE_APPT
             appointment.save_base(update_fields=["appt_status"])
 
+    @staticmethod
     def create_related_visit(
-        self, appointment: Appointment, reason: str | None = None
+        appointment: Appointment, reason: str | None = None
     ) -> SubjectVisit:
         if not appointment.related_visit:
             related_visit = SubjectVisit.objects.create(
                 appointment=appointment,
                 subject_identifier=appointment.subject_identifier,
                 report_datetime=appointment.appt_datetime,
-                visit_schedule_name=self.visit_schedule1.name,
-                schedule_name="schedule1",
+                visit_schedule_name=appointment.visit_schedule_name,
+                schedule_name=appointment.schedule_name,
                 visit_code=appointment.visit_code,
                 visit_code_sequence=appointment.visit_code_sequence,
                 reason=reason or SCHEDULED,
