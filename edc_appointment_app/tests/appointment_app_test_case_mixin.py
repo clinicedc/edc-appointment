@@ -10,7 +10,11 @@ from edc_appointment.creators import UnscheduledAppointmentCreator
 from edc_appointment.models import Appointment
 from edc_appointment_app.consents import consent_v1
 from edc_appointment_app.models import SubjectVisit
-from edc_appointment_app.visit_schedule import get_visit_schedule1, get_visit_schedule2
+from edc_appointment_app.visit_schedule import (
+    get_visit_schedule1,
+    get_visit_schedule2,
+    get_visit_schedule3,
+)
 
 
 class AppointmentAppTestCaseMixin:
@@ -23,8 +27,10 @@ class AppointmentAppTestCaseMixin:
         site_visit_schedules._registry = {}
         self.visit_schedule1 = get_visit_schedule1()
         self.visit_schedule2 = get_visit_schedule2()
+        self.visit_schedule3 = get_visit_schedule3()
         site_visit_schedules.register(self.visit_schedule1)
         site_visit_schedules.register(self.visit_schedule2)
+        site_visit_schedules.register(self.visit_schedule3)
         site_consents.registry = {}
         site_consents.register(consent_v1)
         self.helper = self.helper_cls(
