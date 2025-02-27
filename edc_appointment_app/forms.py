@@ -9,9 +9,7 @@ from .models import CrfThree, NextAppointmentCrf
 
 
 class NextAppointmentCrfFormValidator(NextAppointmentCrfFormValidatorMixin, CrfFormValidator):
-    def clean(self):
-        self.validate_date_is_on_clinic_day()
-        super().clean()
+    pass
 
 
 class CrfThreeForm(NextAppointmentCrfModelFormMixin, CrfModelFormMixin, forms.ModelForm):

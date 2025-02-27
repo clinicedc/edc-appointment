@@ -302,4 +302,4 @@ class CrfFive(CrfModelMixin, BaseUuidModel):
 
 
 class NextAppointmentCrf(NextAppointmentCrfModelMixin, CrfModelMixin, BaseUuidModel):
-    subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
+    pass

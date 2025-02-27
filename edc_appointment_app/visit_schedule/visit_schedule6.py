@@ -54,6 +54,7 @@ def get_visit_schedule6(cdef: ConsentDefinition | None = None) -> VisitSchedule:
         rupper=relativedelta(days=6),
         crfs=crfs,
         facility_name="5-day-clinic",
+        allow_unscheduled=True,
     )
 
     visit3 = Visit(
