@@ -31,14 +31,14 @@ wheels = [
 
 [[package]]
 name = "adverse-event-app"
-version = "1.0.1"
+version = "1.0.3"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.13'",
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4d/2f/4f01c4cd7ed1f3de261bda9c5c607b7280479df91c74fc94d8b2f0c64ce8/adverse_event_app-1.0.1.tar.gz", hash = "sha256:bf78c3d3a688f9a93d0a1d04671c7e084db13486db246c771acee1d541ce2008", size = 18026, upload-time = "2025-07-31T19:46:14.43Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/07/8b/77baeeb043dfcfbdd56b58ea94d5d87cd8e15e8e6f2565889a4ccc6b31fe/adverse_event_app-1.0.3.tar.gz", hash = "sha256:a308b68b6c8033f05927fcf680796e6183b61f98b7801a26cc9715a87f365948", size = 18034, upload-time = "2025-08-01T19:02:30.087Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c2/ee/481ea42f1332985ee784fd054f8539ae84bfdcb2b04b39d043474709c024/adverse_event_app-1.0.1-py3-none-any.whl", hash = "sha256:94fbf1dee711946c8607074ec42ade31f0980dc28df0e69c95189cb00b0f72a8", size = 19629, upload-time = "2025-07-31T19:46:13.581Z" },
+    { url = "https://files.pythonhosted.org/packages/61/4d/1a859fde57a6ac5a3aea267f8fc57535ad6e7182d28781f911a8831b7ad6/adverse_event_app-1.0.3-py3-none-any.whl", hash = "sha256:110223ac7a2e3c1569479e23e44eefb618adcd87e5a354f4b13394c3a8c4cf4f", size = 19660, upload-time = "2025-08-01T19:02:29.003Z" },
 ]
 
 [[package]]
@@ -746,7 +746,7 @@ lint = [
 ]
 test = [
     { name = "adverse-event-app", version = "0.1.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.13'" },
-    { name = "adverse-event-app", version = "1.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.13'" },
+    { name = "adverse-event-app", version = "1.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.13'" },
     { name = "coverage" },
     { name = "django-admin-rangefilter" },
     { name = "django-crypto-fields" },
@@ -910,11 +910,11 @@ test = [
 
 [[package]]
 name = "edc-appointment-app"
-version = "0.2.0"
+version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/8d/68/055b8df1c052ac319492abe7acc31a5163ed24aa0e3acf89b3e5674e80a7/edc_appointment_app-0.2.0.tar.gz", hash = "sha256:96bb461c2d383a98250ba65e4468660f4dff194e8647e61bc19a70fb824d49e2", size = 19639, upload-time = "2025-08-01T13:46:40.709Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0e/04/4a7204b0f4db6171b3b7b2e687069a9aae68b2b86663698e0dd5d88eef8b/edc_appointment_app-1.0.0.tar.gz", hash = "sha256:47d684b964d36634bbeef919ef6397e5f49fc602a1f17b4a4bda5b6a5ba2befc", size = 20026, upload-time = "2025-08-01T19:06:28.383Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/47/6c/fb70bc603ed416acb4c916ff07e69fd5856bd59d1f288eefff75d3032c07/edc_appointment_app-0.2.0-py3-none-any.whl", hash = "sha256:106cdaf5bc075fddc821960ef3a47a6d7f42d62931b6a355fb0a6bb0311acb74", size = 25265, upload-time = "2025-08-01T13:46:39.262Z" },
+    { url = "https://files.pythonhosted.org/packages/c6/01/829b385b50adaa698dbf86aa6e915aaf418ff549666437b1d59662082b39/edc_appointment_app-1.0.0-py3-none-any.whl", hash = "sha256:1e6c26944732652b43cb386271211895f45cfc940e8dcfe8f908141a738d8067", size = 25449, upload-time = "2025-08-01T19:06:27.328Z" },
 ]
 
 [[package]]
@@ -2492,11 +2492,11 @@ wheels = [
 
 [[package]]
 name = "sqlglot"
-version = "27.5.1"
+version = "27.6.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/68/8f/53d90f31f3f4cdd9f4e9893bc3e20e08a57574cc96a0ae7d04d428482670/sqlglot-27.5.1.tar.gz", hash = "sha256:79beb7e92eaebe472f78c7908e15dc542975856c4db9c5ff7380cc215bd7aa76", size = 5406588, upload-time = "2025-07-30T12:19:55.903Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/35/aa/0c93a9974c0dc0726aa1a3ebc956f88bc5f6694d811b23d9a31085bb812b/sqlglot-27.6.0.tar.gz", hash = "sha256:413bc6c9978710bd97110e9a4363c517dfb92954d0a9fd2922e87c5707395deb", size = 5409152, upload-time = "2025-08-01T16:03:12.516Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/dd/90/08dcd98ba9e8ce6e91c273e0d4eba4517be3e59b63018be43a38150936ec/sqlglot-27.5.1-py3-none-any.whl", hash = "sha256:30c70736424b5d951890ce727bc65ee0b5ea3c5af1ef8d145bb3b91ef3ad8026", size = 495618, upload-time = "2025-07-30T12:19:53.636Z" },
+    { url = "https://files.pythonhosted.org/packages/18/58/8b267b6b3c27ccb16367b49db2ac8c6032939f4fbffdc66dd0831833a7b9/sqlglot-27.6.0-py3-none-any.whl", hash = "sha256:828e6eea4e608f221c14f9e5dbe2f9f73142f11ba289d84f58c56ca44ee49d23", size = 496769, upload-time = "2025-08-01T16:03:09.914Z" },
 ]
 
 [package.optional-dependencies]
