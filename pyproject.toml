@@ -9,7 +9,7 @@ namespace = false
 
 [project]
 name = "edc-appointment"
-version = "1.1.1"
+version = "1.1.2"
 description = "Appointment module for clinicedc/edc projects"
 readme = {file = "README.rst", content-type = "text/x-rst"}
 license = "GPL-3.0-or-later"
